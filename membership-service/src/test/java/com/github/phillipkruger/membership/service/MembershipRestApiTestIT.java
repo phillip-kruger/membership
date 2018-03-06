@@ -1,14 +1,21 @@
 package com.github.phillipkruger.membership.service;
 
+import com.github.phillipkruger.membership.boundry.Type;
+import com.github.phillipkruger.membership.boundry.Membership;
+import com.github.phillipkruger.membership.boundry.Person;
 import static io.restassured.RestAssured.*;
 import static io.restassured.matcher.RestAssuredMatchers.*;
 import io.restassured.response.Response;
+import io.restassured.response.ResponseBody;
 import lombok.extern.java.Log;
 import static org.hamcrest.Matchers.*;
+import org.junit.Assert;
 import org.junit.Test;
 
 @Log
 public class MembershipRestApiTestIT {
+    
+    private static final String CONTENT_ROOT = "/membership-service/api/";
     
     @Test
     public void ping(){
@@ -17,26 +24,42 @@ public class MembershipRestApiTestIT {
                 given().
                     contentType("text/plain").
                 when().
-                    get("/api/ping").
+                    get(CONTENT_ROOT + "ping").
                 thenReturn();
                 
-        String s = r.getBody().as(String.class);
+        ResponseBody body = r.getBody();
+        String s = body.asString();
         
-        log.severe(s);
+        Assert.assertEquals("pong", s);
+        
     }
     
     @Test
     public void testJoinMember(){
         
-        Membership membership = new Membership();
-        
-
         given().
             contentType("application/json").
-            body(membership).
+            body(createMembership()).
         when().
-            post("/api");
+            post(CONTENT_ROOT);
         
     }
-                
+    
+    private Membership createMembership(){
+        Membership membership = new Membership();
+        
+        membership.setOwner(createPerson());
+        membership.setType(Type.FULL);
+        return membership;
+    }
+    
+    private Person createPerson(){
+        Person person = new Person();
+        person.addName("Natus");
+        person.addName("Phillip");
+        person.setSurname("Kruger");
+        
+        return person;
+    }
+    
 }

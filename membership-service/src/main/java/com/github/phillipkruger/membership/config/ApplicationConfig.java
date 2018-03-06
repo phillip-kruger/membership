@@ -1,7 +1,5 @@
-package com.github.phillipkruger.membership.service;
+package com.github.phillipkruger.membership.config;
 
-import io.swagger.annotations.Info;
-import io.swagger.annotations.SwaggerDefinition;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
@@ -12,6 +10,7 @@ import javax.ws.rs.core.Application;
  * @author Phillip Kruger (phillip.kruger@phillip-kruger.com)
  */
 @ApplicationPath("/api")
-@SwaggerDefinition(basePath = "/api",info = @Info(title = "Membership API",version = "1.0.0"))
+//@SwaggerDefinition(basePath = "/api",info = @Info(title = "Membership API",version = "1.0.0"))
 public class ApplicationConfig extends Application {
+
 }
