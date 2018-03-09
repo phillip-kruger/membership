@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
     <parent>
         <groupId>com.github.phillip-kruger</groupId>
         <artifactId>membership</artifactId>
@@ -10,8 +9,8 @@
     </parent>
     
     <groupId>com.github.phillip-kruger.membership</groupId>
-    <artifactId>membership-service</artifactId>
-    <packaging>war</packaging>
+    <artifactId>membership-pojo</artifactId>
+    <packaging>jar</packaging>
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,10 +22,6 @@
         <javaee.version>7.0</javaee.version>
         <lombok.version>1.16.20</lombok.version>
        
-        <failOnMissingWebXml>false</failOnMissingWebXml>
-       
-        <log.name>com.github.phillipkruger</log.name>
-        <log.level>FINEST</log.level>
     </properties>
     
     <dependencies>
@@ -44,22 +39,10 @@
             <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>membership-pojo</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.196</version>
-        </dependency>
-
         
     </dependencies>
     
     <build>
         <finalName>${project.artifactId}</finalName>
     </build>
-    
 </project>

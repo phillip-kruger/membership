@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
     <parent>
         <groupId>com.github.phillip-kruger</groupId>
         <artifactId>membership</artifactId>
@@ -10,23 +9,21 @@
     </parent>
     
     <groupId>com.github.phillip-kruger.membership</groupId>
-    <artifactId>membership-service</artifactId>
-    <packaging>war</packaging>
+    <artifactId>memberships-integration-tests</artifactId>
+    <packaging>jar</packaging>
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Java version -->
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        
         <!-- JEE Platform -->        
         <javaee.version>7.0</javaee.version>
         <lombok.version>1.16.20</lombok.version>
-       
-        <failOnMissingWebXml>false</failOnMissingWebXml>
-       
-        <log.name>com.github.phillipkruger</log.name>
-        <log.level>FINEST</log.level>
+        
+        <junit.version>4.12</junit.version>
+        <rest-assured.version>3.0.7</rest-assured.version>
+        <jackson-databind.version>2.9.4</jackson-databind.version>
     </properties>
     
     <dependencies>
@@ -45,21 +42,34 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${rest-assured.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-databind.version}</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>membership-pojo</artifactId>
             <version>${project.version}</version>
+            <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.196</version>
-        </dependency>
-
         
     </dependencies>
     
     <build>
         <finalName>${project.artifactId}</finalName>
     </build>
-    
 </project>

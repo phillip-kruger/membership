@@ -57,6 +57,9 @@
     </developers>
     
     <modules>
+        <module>membership-pojo</module>
         <module>membership-service</module>
+        <module>memberships-integration-tests</module>
+        
     </modules>
 </project>

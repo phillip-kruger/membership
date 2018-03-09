@@ -1,12 +1,15 @@
 package com.github.phillipkruger.membership.boundry;
 
+import com.github.phillipkruger.membership.Membership;
 import com.github.phillipkruger.membership.service.MembershipService;
-import javax.ejb.EJB;
+import java.util.List;
+import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import lombok.extern.java.Log;
@@ -19,7 +22,7 @@ import lombok.extern.java.Log;
 @Path("/")
 public class MembershipRestApi {
     
-    @EJB
+    @Inject
     private MembershipService membershipService;
     
     @GET @Path("ping")
@@ -27,6 +30,18 @@ public class MembershipRestApi {
     public String ping(){
         log.severe("ping->pong");
         return "pong";
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Membership> getAllMemberships(){
+        return membershipService.getAllMembership();
+    }
+    
+    @GET @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Membership getMembership(@NotNull @PathParam(value = "id") int id){
+        return membershipService.getMembership(id);
     }
     
     @POST

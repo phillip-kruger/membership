@@ -1,4 +1,4 @@
-package com.github.phillipkruger.membership.boundry;
+package com.github.phillipkruger.membership;
 
 import java.io.Serializable;
 import javax.persistence.CascadeType;
@@ -36,7 +36,7 @@ public class Membership implements Serializable {
     public static final String QUERY_FIND_ALL_TYPE = "Membership.findAllType";
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int membershipId;
     
     @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
