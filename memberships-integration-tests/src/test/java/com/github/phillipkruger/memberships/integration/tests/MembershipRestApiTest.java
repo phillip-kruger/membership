@@ -25,7 +25,7 @@ import org.junit.runners.MethodSorters;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MembershipRestApiTest {
     
-    private static final String CONTENT_ROOT = "/membership-service/api/";
+    private static final String CONTENT_ROOT = "/membership-service/rest/";
     
     @Test
     public void a_ping(){

@@ -1,4 +1,4 @@
-package com.github.phillipkruger.membership.boundry;
+package com.github.phillipkruger.membership.rest;
 
 import com.github.phillipkruger.membership.Membership;
 import com.github.phillipkruger.membership.service.MembershipService;

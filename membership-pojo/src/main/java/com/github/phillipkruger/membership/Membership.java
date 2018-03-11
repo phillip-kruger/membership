@@ -1,5 +1,7 @@
 package com.github.phillipkruger.membership;
 
+//import graphql.annotations.annotationTypes.GraphQLField;
+//import graphql.annotations.annotationTypes.GraphQLName;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -22,6 +24,7 @@ import lombok.NoArgsConstructor;
  * Membership POJO
  * @author Phillip Kruger (phillip.kruger@phillip-kruger.com)
  */
+//@GraphQLName("membership")
 @Data @AllArgsConstructor @NoArgsConstructor
 @Entity
 @XmlRootElement @XmlAccessorType(XmlAccessType.FIELD)
@@ -37,11 +40,14 @@ public class Membership implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GraphQLField
     private int membershipId;
     
     @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "owner_id")
+//    @GraphQLField
     private Person owner;
     
+//    @GraphQLField
     private Type type;
 }

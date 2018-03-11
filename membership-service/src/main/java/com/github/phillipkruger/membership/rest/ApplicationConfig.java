@@ -1,4 +1,4 @@
-package com.github.phillipkruger.membership.config;
+package com.github.phillipkruger.membership.rest;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
@@ -9,8 +9,8 @@ import javax.ws.rs.core.Application;
  * 
  * @author Phillip Kruger (phillip.kruger@phillip-kruger.com)
  */
-@ApplicationPath("/api")
-//@SwaggerDefinition(basePath = "/api",info = @Info(title = "Membership API",version = "1.0.0"))
+@ApplicationPath("/rest")
+//@SwaggerDefinition(basePath = "/rest",info = @Info(title = "Membership API",version = "1.0.0"))
 public class ApplicationConfig extends Application {
 
 }
