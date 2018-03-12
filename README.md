@@ -24,21 +24,21 @@ CREATE SCHEMA `membership` DEFAULT CHARACTER SET utf8 ;
 
 ### Get all memberships
     {
-      memberships {
-        owner {
-          names
+        memberships {
+            owner {
+                names
+            }
+            type
         }
-        type
-      }
     }
 
 ### Get a single membership (by id)
     {
-      membership(membershipId:2){
-        owner{
-          names
-          surname
+        membership(membershipId:2){
+            owner{
+                names
+                surname
+            }
         }
-    }
 
-# }
+    }
