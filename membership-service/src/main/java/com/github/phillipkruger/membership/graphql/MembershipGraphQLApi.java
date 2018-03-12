@@ -1,6 +1,5 @@
 package com.github.phillipkruger.membership.graphql;
 
-import com.github.phillipkruger.membership.service.LinkService;
 import com.github.phillipkruger.membership.service.MembershipService;
 import graphql.schema.GraphQLSchema;
 import graphql.servlet.SimpleGraphQLServlet;
@@ -19,16 +18,12 @@ import javax.inject.Inject;
 public class MembershipGraphQLApi implements ServletContextListener {
     
     @Inject
-    private LinkService linkService;
-    
-    @Inject
     private MembershipService membershipService;
     
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         
         GraphQLSchema schema = new GraphQLSchemaGenerator()
-            .withOperationsFromSingleton(linkService,LinkService.class)
             .withOperationsFromSingleton(membershipService, MembershipService.class)
             .generate(); 
 
