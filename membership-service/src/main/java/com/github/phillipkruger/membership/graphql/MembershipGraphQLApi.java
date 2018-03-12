@@ -1,6 +1,8 @@
 package com.github.phillipkruger.membership.graphql;
 
-import com.coxautodev.graphql.tools.SchemaParser;
+//import com.coxautodev.graphql.tools.SchemaParser;
+import graphql.annotations.processor.GraphQLAnnotations;
+import graphql.schema.GraphQLObjectType;
 import graphql.schema.GraphQLSchema;
 import graphql.servlet.SimpleGraphQLServlet;
 import javax.inject.Inject;
@@ -11,7 +13,8 @@ import javax.servlet.ServletRegistration;
 import javax.servlet.annotation.WebListener;
 import lombok.extern.java.Log;
 
-//@WebServlet(urlPatterns = "/graphql")
+import static graphql.schema.GraphQLSchema.newSchema;
+
 @Log
 @WebListener
 public class MembershipGraphQLApi implements ServletContextListener {
@@ -21,14 +24,15 @@ public class MembershipGraphQLApi implements ServletContextListener {
     
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        log.severe(">>>>>>>>>>>>> Hello <<<<<<<<<<<<");
         
+        GraphQLObjectType object = GraphQLAnnotations.object(Query.class);
+        GraphQLSchema schema = newSchema().query(object).build();
         
-        GraphQLSchema schema = SchemaParser.newParser()
-                .file(GRAPHQL_SCHEMA_PATH)
-                .resolvers(query)
-                .build()
-                .makeExecutableSchema();
+        //GraphQLSchema schema = SchemaParser.newParser()
+        //        .file(GRAPHQL_SCHEMA_PATH)
+        //        .resolvers(query)
+        //        .build()
+        //        .makeExecutableSchema();
         
         SimpleGraphQLServlet.Builder builder = SimpleGraphQLServlet.builder(schema);
         SimpleGraphQLServlet graphQLServlet = builder.build();
@@ -41,9 +45,7 @@ public class MembershipGraphQLApi implements ServletContextListener {
     }
 
     @Override
-    public void contextDestroyed(ServletContextEvent sce) {
-        log.severe(">>>>>>>>>>>>> Bye bye <<<<<<<<<<<<");
-    }
+    public void contextDestroyed(ServletContextEvent sce) {}
     
     private static final String SERVLET_NAME = "MembershipGraphQLServlet";
     private static final String[] SERVLET_URL = new String[]{"/graphql"};

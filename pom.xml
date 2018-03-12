@@ -71,7 +71,7 @@
         <!-- JEE Platform -->        
         <javaee.version>7.0</javaee.version>
         <lombok.version>1.16.20</lombok.version>
-        <graphql.version>5.2</graphql.version>
+        <graphql-annotations.version>5.2</graphql-annotations.version>
     </properties>
     
     <dependencies>
@@ -90,11 +90,11 @@
             <scope>provided</scope>
         </dependency>
         <!-- GraphQL -->
-<!--        <dependency>
+        <dependency>
             <groupId>io.github.graphql-java</groupId>
             <artifactId>graphql-java-annotations</artifactId>
-            <version>${graphql.version}</version>
-        </dependency>-->
+            <version>${graphql-annotations.version}</version>
+        </dependency>
         
     </dependencies>
     

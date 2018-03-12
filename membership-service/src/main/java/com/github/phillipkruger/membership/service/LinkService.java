@@ -6,12 +6,12 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 
-@ApplicationScoped
+//@ApplicationScoped
 public class LinkService {
     private List<Link> links;
     
-    @PostConstruct
-    public void init() {
+    //@PostConstruct
+    public LinkService() {
         links = new ArrayList<>();
         //add some links to start off with
         links.add(new Link("http://howtographql.com", "Your favorite GraphQL page"));
