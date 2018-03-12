@@ -90,12 +90,16 @@
             <scope>provided</scope>
         </dependency>
         <!-- GraphQL -->
-        <dependency>
+<!--        <dependency>
             <groupId>io.github.graphql-java</groupId>
             <artifactId>graphql-java-annotations</artifactId>
             <version>${graphql-annotations.version}</version>
+        </dependency>-->
+        <dependency>
+            <groupId>io.leangen.graphql</groupId>
+            <artifactId>spqr</artifactId>
+            <version>0.9.6</version>
         </dependency>
-        
     </dependencies>
     
     <build>

@@ -1,6 +1,7 @@
 package com.github.phillipkruger.membership.service;
 
 import com.github.phillipkruger.membership.Membership;
+import io.leangen.graphql.annotations.GraphQLQuery;
 import java.util.List;
 import java.util.logging.Level;
 import javax.ejb.Stateless;
@@ -22,7 +23,8 @@ public class MembershipService {
         return membership;    
     }
     
-    public List<Membership> getAllMembership() {
+    @GraphQLQuery(name = "allMemberships")
+    public List<Membership> getAllMemberships() {
         return em.createNamedQuery(Membership.QUERY_FIND_ALL, Membership.class).getResultList();
     }
 

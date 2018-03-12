@@ -1,11 +1,11 @@
 package com.github.phillipkruger.membership.graphql;
 
-//import com.coxautodev.graphql.tools.SchemaParser;
-import graphql.annotations.processor.GraphQLAnnotations;
+//import graphql.annotations.processor.GraphQLAnnotations;
+import com.github.phillipkruger.membership.service.LinkService;
+import com.github.phillipkruger.membership.service.MembershipService;
 import graphql.schema.GraphQLObjectType;
 import graphql.schema.GraphQLSchema;
 import graphql.servlet.SimpleGraphQLServlet;
-import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -13,27 +13,27 @@ import javax.servlet.ServletRegistration;
 import javax.servlet.annotation.WebListener;
 import lombok.extern.java.Log;
 
-import static graphql.schema.GraphQLSchema.newSchema;
+import io.leangen.graphql.GraphQLSchemaGenerator;
+import javax.inject.Inject;
 
 @Log
 @WebListener
 public class MembershipGraphQLApi implements ServletContextListener {
     
     @Inject
-    private Query query;
+    private LinkService linkService;
+    
+    @Inject
+    private MembershipService membershipService;
     
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         
-        GraphQLObjectType object = GraphQLAnnotations.object(Query.class);
-        GraphQLSchema schema = newSchema().query(object).build();
-        
-        //GraphQLSchema schema = SchemaParser.newParser()
-        //        .file(GRAPHQL_SCHEMA_PATH)
-        //        .resolvers(query)
-        //        .build()
-        //        .makeExecutableSchema();
-        
+        GraphQLSchema schema = new GraphQLSchemaGenerator()
+            .withOperationsFromSingleton(linkService,LinkService.class)
+            .withOperationsFromSingleton(membershipService, MembershipService.class)
+            .generate(); 
+
         SimpleGraphQLServlet.Builder builder = SimpleGraphQLServlet.builder(schema);
         SimpleGraphQLServlet graphQLServlet = builder.build();
         
@@ -49,5 +49,5 @@ public class MembershipGraphQLApi implements ServletContextListener {
     
     private static final String SERVLET_NAME = "MembershipGraphQLServlet";
     private static final String[] SERVLET_URL = new String[]{"/graphql"};
-    private static final String GRAPHQL_SCHEMA_PATH = "/schema.graphqls"; 
+    
 }

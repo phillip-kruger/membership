@@ -35,7 +35,7 @@ public class MembershipRestApi {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Membership> getAllMemberships(){
-        return membershipService.getAllMembership();
+        return membershipService.getAllMemberships();
     }
     
     @GET @Path("{id}")

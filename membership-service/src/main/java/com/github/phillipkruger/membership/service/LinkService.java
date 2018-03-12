@@ -1,23 +1,26 @@
 package com.github.phillipkruger.membership.service;
 
 import com.github.phillipkruger.membership.Link;
+import io.leangen.graphql.annotations.GraphQLQuery;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
+import javax.ejb.Stateless;
 
-//@ApplicationScoped
+@Stateless
 public class LinkService {
+    
     private List<Link> links;
     
-    //@PostConstruct
-    public LinkService() {
+    @PostConstruct
+    public void init() {
         links = new ArrayList<>();
         //add some links to start off with
         links.add(new Link("http://howtographql.com", "Your favorite GraphQL page"));
         links.add(new Link("http://graphql.org/learn/", "The official docks"));
     }
 
+    @GraphQLQuery(name = "allLinks")
     public List<Link> getAllLinks() {
         return links;
     }

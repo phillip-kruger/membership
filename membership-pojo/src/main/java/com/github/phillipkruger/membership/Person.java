@@ -1,7 +1,6 @@
 package com.github.phillipkruger.membership;
 
-//import graphql.annotations.annotationTypes.GraphQLField;
-//import graphql.annotations.annotationTypes.GraphQLName;
+import io.leangen.graphql.annotations.GraphQLQuery;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
@@ -23,7 +22,6 @@ import lombok.NoArgsConstructor;
  * Member POJO
  * @author Phillip Kruger (phillip.kruger@phillip-kruger.com)
  */
-//@GraphQLName("person")
 @Data @AllArgsConstructor @NoArgsConstructor
 @Entity
 @XmlRootElement @XmlAccessorType(XmlAccessType.FIELD)
@@ -32,15 +30,15 @@ public class Person implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@GraphQLField
+    @GraphQLQuery(name = "personId")
     private int id;
     
     @Column(name = "name")
     @ElementCollection(fetch = FetchType.EAGER,targetClass=String.class)
-    //@GraphQLField
+    @GraphQLQuery(name = "names")
     private List<String> names = new LinkedList<>();
     
-    //@GraphQLField
+    @GraphQLQuery(name = "surname")
     private String surname;
  
     public void addName(String name){
