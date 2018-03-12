@@ -1,9 +1,7 @@
 package com.github.phillipkruger.membership.graphql;
 
-//import graphql.annotations.processor.GraphQLAnnotations;
 import com.github.phillipkruger.membership.service.LinkService;
 import com.github.phillipkruger.membership.service.MembershipService;
-import graphql.schema.GraphQLObjectType;
 import graphql.schema.GraphQLSchema;
 import graphql.servlet.SimpleGraphQLServlet;
 import javax.servlet.ServletContext;

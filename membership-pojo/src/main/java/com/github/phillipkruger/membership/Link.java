@@ -6,8 +6,8 @@ import lombok.Data;
 
 @Data @AllArgsConstructor
 public class Link {
-    @GraphQLQuery(name = "url", description = "The url of the link")
+    @GraphQLQuery//(name = "url", description = "The url of the link")
     private String url;
-    @GraphQLQuery(name = "description", description = "The description of the link")
+    @GraphQLQuery//(name = "description", description = "The description of the link")
     private String description;
 }

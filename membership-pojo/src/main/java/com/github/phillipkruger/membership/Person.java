@@ -30,15 +30,15 @@ public class Person implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @GraphQLQuery(name = "personId")
+    @GraphQLQuery
     private int id;
     
     @Column(name = "name")
     @ElementCollection(fetch = FetchType.EAGER,targetClass=String.class)
-    @GraphQLQuery(name = "names")
+    @GraphQLQuery
     private List<String> names = new LinkedList<>();
     
-    @GraphQLQuery(name = "surname")
+    @GraphQLQuery
     private String surname;
  
     public void addName(String name){

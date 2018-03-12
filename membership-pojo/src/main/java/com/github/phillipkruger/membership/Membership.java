@@ -38,14 +38,14 @@ public class Membership implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @GraphQLQuery(name = "membershipId")
+    @GraphQLQuery
     private int membershipId;
     
     @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "owner_id")
-    @GraphQLQuery(name = "owner")
+    @GraphQLQuery
     private Person owner;
     
-    @GraphQLQuery(name = "type")
+    @GraphQLQuery
     private Type type;
 }

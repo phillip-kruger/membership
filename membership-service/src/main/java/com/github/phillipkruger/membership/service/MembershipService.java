@@ -23,7 +23,7 @@ public class MembershipService {
         return membership;    
     }
     
-    @GraphQLQuery(name = "allMemberships")
+    @GraphQLQuery
     public List<Membership> getAllMemberships() {
         return em.createNamedQuery(Membership.QUERY_FIND_ALL, Membership.class).getResultList();
     }

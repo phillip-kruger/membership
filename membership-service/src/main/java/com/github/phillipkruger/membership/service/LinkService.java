@@ -5,9 +5,9 @@ import io.leangen.graphql.annotations.GraphQLQuery;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
 
-@Stateless
+@ApplicationScoped
 public class LinkService {
     
     private List<Link> links;
@@ -20,7 +20,7 @@ public class LinkService {
         links.add(new Link("http://graphql.org/learn/", "The official docks"));
     }
 
-    @GraphQLQuery(name = "allLinks")
+    @GraphQLQuery
     public List<Link> getAllLinks() {
         return links;
     }
