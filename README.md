@@ -52,13 +52,17 @@ TODO
 #### with a fragment:
 
     {
-        memberships{
-            membershipId
-            owner {
-                ... owner
-            }
-            type
+        memberships {
+         ...fullMembership
         }
+    }
+
+    fragment fullMembership on Membership {
+            membershipId
+        owner{
+           ...owner
+        }
+        type
     }
 
     fragment owner on Person {
@@ -67,6 +71,27 @@ TODO
         surname  
     }
 
+#### with a fragment and named:
+
+    query Memberships {
+        memberships{
+            ...fullMembership
+        }
+    }
+
+    fragment fullMembership on Membership {
+        membershipId
+        owner{
+            ...owner
+        }
+        type
+    }
+
+    fragment owner on Person {
+        id
+        names
+        surname  
+    }
 
 ### Get a single membership (by id):
     {
@@ -77,6 +102,34 @@ TODO
             }
         }
 
+    }
+
+#### with a fragment, variables and named:
+
+    query Membership($id:Int!) {
+        membership(membershipId:$id){
+            ...fullMembership
+        }
+    }
+
+    fragment fullMembership on Membership {
+        membershipId
+        owner{
+          ...owner
+        }
+        type
+    }
+
+    fragment owner on Person {
+        id
+        names
+        surname  
+    }
+
+and then variable:
+
+    {
+        "id":1
     }
 
 ### Create a new member:
@@ -96,13 +149,17 @@ TODO
 #### with a fragment:
 
     mutation CreateMember {
-        membership(membership: {type:FULL,owner: {names: "Gert",surname:"van Rooyen"}}) {
-            membershipId
-            owner{
-                ...owner
-            }
-            type
+        membership(membership: {type:FULL,owner: {names: "Minki",surname:"van der Westhuizen"}}) {
+            ...fullMembership
         }
+    }
+
+    fragment fullMembership on Membership {
+        membershipId
+        owner{
+            ...owner
+        }
+        type
     }
 
     fragment owner on Person {
@@ -110,6 +167,40 @@ TODO
         names
         surname  
     }
+
+#### with a fragment and variables:
+
+    mutation CreateMember($membership: MembershipInput!) {
+        membership(membership:$membership) {
+            ...fullMembership
+        }
+    }
+
+    fragment fullMembership on Membership {
+        membershipId
+        owner{
+            ...owner
+        }
+        type
+    }
+
+    fragment owner on Person {
+        id
+        names
+        surname  
+    }
+
+and then variable:
+
+    {
+        "membership": {
+            "owner": {
+                "names": "Christina",
+                "surname": "Storm"
+            },
+            "type": "FULL"
+        }
+    }   
 
 ## TODO:
 
