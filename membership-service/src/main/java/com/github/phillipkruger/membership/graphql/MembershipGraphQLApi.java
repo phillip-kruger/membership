@@ -13,8 +13,9 @@ import lombok.extern.java.Log;
 
 import io.leangen.graphql.GraphQLSchemaGenerator;
 import io.leangen.graphql.metadata.strategy.query.AnnotatedResolverBuilder;
-import io.leangen.graphql.metadata.strategy.query.PublicResolverBuilder;
-import io.leangen.graphql.metadata.strategy.value.jackson.JacksonValueMapperFactory;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Member;
+import java.lang.reflect.Method;
 import javax.inject.Inject;
 
 @Log
@@ -30,7 +31,7 @@ public class MembershipGraphQLApi implements ServletContextListener {
         GraphQLSchema schema = new GraphQLSchemaGenerator()
                 .withResolverBuilders(
                         //Resolve by annotations
-                        new AnnotatedResolverBuilder())//,
+                        new AnnotatedResolverBuilder().withDefaultFilters())
                         //Resolve public methods inside root package
                         //new PublicResolverBuilder("com.github.phillipkruger.membership"))
                 .withOperationsFromSingleton(membershipService,MembershipService.class)
