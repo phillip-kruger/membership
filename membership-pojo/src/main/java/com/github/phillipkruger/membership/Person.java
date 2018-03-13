@@ -1,5 +1,6 @@
 package com.github.phillipkruger.membership;
 
+import io.leangen.graphql.annotations.GraphQLId;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -30,7 +31,7 @@ public class Person implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @GraphQLQuery
+    @GraphQLId
     private int id;
     
     @Column(name = "name")

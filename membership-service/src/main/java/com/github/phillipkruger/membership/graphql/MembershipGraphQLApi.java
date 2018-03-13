@@ -1,6 +1,7 @@
 package com.github.phillipkruger.membership.graphql;
 
 import com.github.phillipkruger.membership.service.MembershipService;
+import graphql.execution.instrumentation.tracing.TracingInstrumentation;
 import graphql.schema.GraphQLSchema;
 import graphql.servlet.SimpleGraphQLServlet;
 import javax.servlet.ServletContext;
@@ -11,6 +12,9 @@ import javax.servlet.annotation.WebListener;
 import lombok.extern.java.Log;
 
 import io.leangen.graphql.GraphQLSchemaGenerator;
+import io.leangen.graphql.metadata.strategy.query.AnnotatedResolverBuilder;
+import io.leangen.graphql.metadata.strategy.query.PublicResolverBuilder;
+import io.leangen.graphql.metadata.strategy.value.jackson.JacksonValueMapperFactory;
 import javax.inject.Inject;
 
 @Log
@@ -24,8 +28,19 @@ public class MembershipGraphQLApi implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         
         GraphQLSchema schema = new GraphQLSchemaGenerator()
-            .withOperationsFromSingleton(membershipService, MembershipService.class)
-            .generate(); 
+                .withResolverBuilders(
+                        //Resolve by annotations
+                        new AnnotatedResolverBuilder())//,
+                        //Resolve public methods inside root package
+                        //new PublicResolverBuilder("com.github.phillipkruger.membership"))
+                .withOperationsFromSingleton(membershipService,MembershipService.class)
+                
+                .generate();
+        
+        
+//        GraphQLSchema schema = new GraphQLSchemaGenerator()
+//            .withOperationsFromSingleton(membershipService, MembershipService.class)
+//            .generate(); 
 
         SimpleGraphQLServlet.Builder builder = SimpleGraphQLServlet.builder(schema);
         SimpleGraphQLServlet graphQLServlet = builder.build();

@@ -2,6 +2,13 @@
 
 This is an example application that demonstrate how to add [GraphQL](http://facebook.github.io/graphql) to your existing JAX-RS Application.
 
+This application use libraries:
+
+* [graphql-java](https://github.com/graphql-java/graphql-java)
+* [graphql-java-servlet](https://github.com/graphql-java/graphql-java-servlet)
+* [graphQL-spqr](https://github.com/leangen/GraphQL-SPQR)
+* [graphiql](https://github.com/graphql/graphiql)
+
 TODO: Insert high-level diagram
 
 ## Getting started
@@ -93,6 +100,14 @@ TODO
         surname  
     }
 
+#### and only FULL memberships
+
+    query FullMemberships{
+         memberships(ofType:FULL){
+            ...fullMembership
+          }
+    }
+
 ### Get a single membership (by id):
     {
         membership(membershipId:2){
@@ -104,7 +119,7 @@ TODO
 
     }
 
-#### with a fragment, variables and named:
+#### with a fragment, variable and named:
 
     query Membership($id:Int!) {
         membership(membershipId:$id){
@@ -202,10 +217,51 @@ and then variable:
         }
     }   
 
+## Introspection
+
+    {
+        __schema {
+            queryType {
+                name
+                fields {
+                    name
+                }
+            }
+            mutationType{
+                name
+                fields{
+                    name
+                }
+            }
+            subscriptionType {
+                name
+                fields{
+                    name
+                }
+            }
+        }
+    }
+
+    {
+        __type(name: "Membership") {
+            name
+            kind
+            fields {
+                name
+                args {
+                    name
+                }
+            }
+        }
+    }
+
+
 ## TODO:
 
-* Add variables
 * Add filters
+* Subscriptions
+* Exceptions
+* Instrumentation
 * Add client in Test
 * Get swagger & swagger ui to work (https://dzone.com/articles/creating-documented-rest-apis-with-wildfly-swarm)
 * Look at flyway for test data creation ?
