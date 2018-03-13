@@ -39,7 +39,7 @@ TODO
 
 ## Some example GraphQL queries
 
-### Get all memberships
+### Get all memberships:
     {
         memberships {
             owner {
@@ -49,7 +49,26 @@ TODO
         }
     }
 
-### Get a single membership (by id)
+#### with a fragment:
+
+    {
+        memberships{
+            membershipId
+            owner {
+                ... owner
+            }
+            type
+        }
+    }
+
+    fragment owner on Person {
+        id
+        names
+        surname  
+    }
+
+
+### Get a single membership (by id):
     {
         membership(membershipId:2){
             owner{
@@ -60,9 +79,41 @@ TODO
 
     }
 
+### Create a new member:
+
+    mutation CreateMember {
+        membership(membership: {type:FULL,owner: {names: "Piet",surname:"Pompies"}}) {
+            membershipId
+                owner{
+                    id
+                    names
+                    surname
+                }
+            type
+        }
+    }
+
+#### with a fragment:
+
+    mutation CreateMember {
+        membership(membership: {type:FULL,owner: {names: "Gert",surname:"van Rooyen"}}) {
+            membershipId
+            owner{
+                ...owner
+            }
+            type
+        }
+    }
+
+    fragment owner on Person {
+        id
+        names
+        surname  
+    }
+
 ## TODO:
 
-* Add mutations
+* Add variables
 * Add filters
 * Add client in Test
 * Get swagger & swagger ui to work (https://dzone.com/articles/creating-documented-rest-apis-with-wildfly-swarm)

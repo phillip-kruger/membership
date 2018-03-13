@@ -19,8 +19,8 @@ public class MembershipService {
     @PersistenceContext(name="com.github.phillipkruger.membership")
     private EntityManager em;
     
-    @GraphQLMutation//(name = "createMembership")
-    public Membership createMembership(@NotNull Membership membership){
+    @GraphQLMutation(name = "membership")
+    public Membership createMembership(@GraphQLArgument(name = "membership") @NotNull Membership membership){
         membership = em.merge(membership);
         log.log(Level.INFO, "Created membership [{0}]", membership);
         return membership;    
