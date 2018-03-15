@@ -1,6 +1,5 @@
 # TODO
 
-* Error Handling
 * Directives
 * Pagination
 * Subscriptions

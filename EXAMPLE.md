@@ -170,6 +170,27 @@ and then variable:
         }
     }   
 
+
+### Exceptions
+
+    mutation CreateMember($membership: MembershipInput!) {
+        membership(membership:$membership) {
+            ...fullMembership
+        }
+    }
+
+and then variable:
+
+    {
+        "membership": {
+            "owner": {
+                "names": "Christina",
+                "surname": "S"
+            },
+            "type": "FULL"
+        }
+    }   
+
 ## Introspection
 
     {
