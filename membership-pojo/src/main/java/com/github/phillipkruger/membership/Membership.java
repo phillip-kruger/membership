@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -44,10 +45,12 @@ public class Membership implements Serializable {
     
     @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "owner_id")
-    @GraphQLQuery
+    @GraphQLQuery 
+    @NotNull(message = "Owner can not be empty")
     private Person owner;
     
-    @GraphQLQuery
+    @GraphQLQuery 
+    @NotNull(message = "Type can not be empty")
     private Type type;
     
 }

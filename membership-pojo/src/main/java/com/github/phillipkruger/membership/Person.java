@@ -12,6 +12,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -36,13 +38,17 @@ public class Person implements Serializable {
     
     @Column(name = "name")
     @ElementCollection(fetch = FetchType.EAGER,targetClass=String.class)
-    @GraphQLQuery
-    private List<String> names = new LinkedList<>();
+    @GraphQLQuery 
+    @Size(min=1,max=4, message = "Name can not be empty")
+    private List<String> names;
     
-    @GraphQLQuery
+    @GraphQLQuery 
+    @NotNull(message = "Surname can not be empty") 
+    @Size(min=2, message = "Surname '${validatedValue}' is too short, minimum {min} characters")
     private String surname;
  
     public void addName(String name){
+        if(names==null)names = new LinkedList<>();
         names.add(name);
     }
 }

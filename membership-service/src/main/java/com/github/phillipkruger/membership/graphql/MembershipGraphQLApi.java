@@ -38,7 +38,9 @@ public class MembershipGraphQLApi implements ServletContextListener {
 //            .withOperationsFromSingleton(membershipService, MembershipService.class)
 //            .generate(); 
 
-        SimpleGraphQLServlet.Builder builder = SimpleGraphQLServlet.builder(schema);
+        SimpleGraphQLServlet.Builder builder = SimpleGraphQLServlet.builder(schema)
+                .withGraphQLErrorHandler(new MembershipErrorHandler());
+        
         SimpleGraphQLServlet graphQLServlet = builder.build();
         
         ServletContext context = sce.getServletContext();
