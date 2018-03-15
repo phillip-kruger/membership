@@ -50,6 +50,4 @@ public class MembershipRestApi {
         membershipService.createMembership(membership);
     }
     
-    
-    
 }

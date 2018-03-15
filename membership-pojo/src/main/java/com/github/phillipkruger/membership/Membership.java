@@ -49,4 +49,5 @@ public class Membership implements Serializable {
     
     @GraphQLQuery
     private Type type;
+    
 }

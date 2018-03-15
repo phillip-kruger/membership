@@ -2,7 +2,7 @@
 
 This is an example application that demonstrate how to add [GraphQL](http://facebook.github.io/graphql) to your existing JAX-RS Application.
 
-This application use libraries:
+This application use these libraries:
 
 * [graphql-java](https://github.com/graphql-java/graphql-java)
 * [graphql-java-servlet](https://github.com/graphql-java/graphql-java-servlet)
@@ -258,7 +258,7 @@ and then variable:
 
 ## TODO:
 
-* Add filters
+* Add generic filters
 * Subscriptions
 * Exceptions
 * Instrumentation

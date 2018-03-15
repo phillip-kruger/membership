@@ -1,7 +1,6 @@
 package com.github.phillipkruger.membership.graphql;
 
 import com.github.phillipkruger.membership.service.MembershipService;
-import graphql.execution.instrumentation.tracing.TracingInstrumentation;
 import graphql.schema.GraphQLSchema;
 import graphql.servlet.SimpleGraphQLServlet;
 import javax.servlet.ServletContext;
@@ -13,9 +12,6 @@ import lombok.extern.java.Log;
 
 import io.leangen.graphql.GraphQLSchemaGenerator;
 import io.leangen.graphql.metadata.strategy.query.AnnotatedResolverBuilder;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Member;
-import java.lang.reflect.Method;
 import javax.inject.Inject;
 
 @Log
@@ -35,7 +31,6 @@ public class MembershipGraphQLApi implements ServletContextListener {
                         //Resolve public methods inside root package
                         //new PublicResolverBuilder("com.github.phillipkruger.membership"))
                 .withOperationsFromSingleton(membershipService,MembershipService.class)
-                
                 .generate();
         
         
