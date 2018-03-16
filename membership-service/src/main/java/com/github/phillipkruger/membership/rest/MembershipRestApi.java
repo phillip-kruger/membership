@@ -25,13 +25,6 @@ public class MembershipRestApi {
     @Inject
     private MembershipService membershipService;
     
-    @GET @Path("ping")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String ping(){
-        log.severe("ping->pong");
-        return "pong";
-    }
-    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Membership> getAllMemberships(){
@@ -48,6 +41,13 @@ public class MembershipRestApi {
     @Consumes(MediaType.APPLICATION_JSON)
     public void joinMember(@NotNull Membership membership) {
         membershipService.createMembership(membership);
+    }
+    
+    @GET @Path("ping")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String ping(){
+        log.severe("ping->pong");
+        return "pong";
     }
     
 }

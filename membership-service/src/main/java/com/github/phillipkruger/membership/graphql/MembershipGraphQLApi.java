@@ -25,19 +25,10 @@ public class MembershipGraphQLApi implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         
         GraphQLSchema schema = new GraphQLSchemaGenerator()
-                .withResolverBuilders(
-                        //Resolve by annotations
-                        new AnnotatedResolverBuilder().withDefaultFilters())
-                        //Resolve public methods inside root package
-                        //new PublicResolverBuilder("com.github.phillipkruger.membership"))
+                .withResolverBuilders(new AnnotatedResolverBuilder().withDefaultFilters())
                 .withOperationsFromSingleton(membershipService,MembershipService.class)
                 .generate();
         
-        
-//        GraphQLSchema schema = new GraphQLSchemaGenerator()
-//            .withOperationsFromSingleton(membershipService, MembershipService.class)
-//            .generate(); 
-
         SimpleGraphQLServlet.Builder builder = SimpleGraphQLServlet.builder(schema)
                 .withGraphQLErrorHandler(new MembershipErrorHandler());
         
