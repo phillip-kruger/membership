@@ -170,6 +170,29 @@ and then variable:
         }
     }   
 
+### Edit a membership
+
+
+    mutation EditMember($membership: MembershipInput!) {
+        membership(membership:$membership) {
+            ...fullMembership
+        }
+    }
+
+#### Add umlaut on the surname
+    {
+        "membership": {
+          "membershipId": 2,
+            "owner": {
+                "names": [
+                "Charmaine",
+                "Juliet"
+              ],
+                "surname": "Krüger"
+            },
+            "type": "FULL"
+        }
+    }
 
 ### Exceptions
 
