@@ -9,7 +9,13 @@ This application use these libraries:
 * [graphQL-spqr](https://github.com/leangen/GraphQL-SPQR)
 * [graphiql](https://github.com/graphql/graphiql)
 
-TODO: Insert high-level diagram
+
+![](https://raw.githubusercontent.com/phillip-kruger/membership/master/membership.png)
+
+Simple CRUD Application that can create, update, delete and get a membership. Every membership has a owner. The application use JPA to persist the Object in a DB.
+"Business Logic" is in the Membership Service (EJB) and the JAX-RS API in MembershipRestApi.
+
+Added annotations and MembershipGraphQLApi to expose API as GraphQL.
 
 ## Getting started
 
