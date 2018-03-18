@@ -26,9 +26,9 @@ Get the source:
     git clone https://github.com/phillip-kruger/membership.git
     cd membership
 
-Build all:
+Build:
 
-    mvn -DskipTests=true clean install
+    mvn clean install -pl membership-service -am
 
 Start wildfly-swarm:
 
@@ -40,14 +40,25 @@ Populate test data:
     cd ../memberships-integration-tests
     mvn clean install
 
-### From release
+### Create fat release (optional)
+    
+    cd ../membership-service
+    mvn -Pwildfly-swarm-package clean install
+    
+Distributable jar file is:
+    
+    target/membership-service-swarm.jar
 
-TODO
+To run :
+
+    java -jar membership-service-swarm.jar
+
+### Run some examples:
+
+In the [GraphiQL](http://localhost:8080/membership-service/) GUI try out some of the [examples](EXAMPLE.md)
 
 ## Links:
 
-* GraphiQL GUI: http://localhost:8080/membership-service/
 * Example get all Ids:  http://localhost:8080/membership-service/graphql?query={memberships{membershipId}}
 * Example REST get all: http://localhost:8080/membership-service/rest
-* [Some example GraphQL queries](EXAMPLE.md)
 * [TODO](TODO.md)
