@@ -103,7 +103,7 @@ and then variable:
 ### Create a new member:
 
     mutation CreateMember {
-        membership(membership: {type:FULL,owner: {names: "Piet",surname:"Pompies"}}) {
+        createMembership(membership: {type:FULL,owner: {names: "Piet",surname:"Pompies"}}) {
             membershipId
                 owner{
                     id
@@ -117,7 +117,7 @@ and then variable:
 #### with a fragment:
 
     mutation CreateMember {
-        membership(membership: {type:FULL,owner: {names: "Minki",surname:"van der Westhuizen"}}) {
+        createMembership(membership: {type:FULL,owner: {names: "Minki",surname:"van der Westhuizen"}}) {
             ...fullMembership
         }
     }
@@ -139,7 +139,7 @@ and then variable:
 #### with a fragment and variables:
 
     mutation CreateMember($membership: MembershipInput!) {
-        membership(membership:$membership) {
+        createMembership(membership:$membership) {
             ...fullMembership
         }
     }
@@ -174,7 +174,7 @@ and then variable:
 
 
     mutation EditMember($membership: MembershipInput!) {
-        membership(membership:$membership) {
+        createMembership(membership:$membership) {
             ...fullMembership
         }
     }
@@ -193,6 +193,21 @@ and then variable:
             "type": "FULL"
         }
     }
+
+### Delete a membership
+    
+    mutation DeleteMembership($id:Int!){
+        deleteMembership(membershipId:$id){
+          ...fullMembership
+        }
+    }
+
+and then variable:
+
+    {
+        "id":1
+    }
+
 
 ### Exceptions
 

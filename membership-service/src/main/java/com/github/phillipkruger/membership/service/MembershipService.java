@@ -26,11 +26,20 @@ public class MembershipService {
     @PersistenceContext(name="com.github.phillipkruger.membership")
     private EntityManager em;
     
-    @GraphQLMutation(name = "membership")
+    @GraphQLMutation(name = "createMembership")
     public Membership createMembership(@GraphQLArgument(name = "membership") @NotNull Membership membership){
         membership = em.merge(membership);
         log.log(Level.INFO, "Created membership [{0}]", membership);
         return membership;    
+    }
+    
+    @GraphQLMutation(name = "deleteMembership")
+    public Membership deleteMembership(@GraphQLArgument(name = "membershipId") int id){
+        Membership membership = getMembership(id);
+        if(membership!=null){
+            em.remove(membership);
+        }
+        return membership;
     }
     
     @GraphQLQuery(name = "memberships")

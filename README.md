@@ -51,4 +51,3 @@ TODO
 * Example REST get all: http://localhost:8080/membership-service/rest
 * [Some example GraphQL queries](EXAMPLE.md)
 * [TODO](TODO.md)
-
