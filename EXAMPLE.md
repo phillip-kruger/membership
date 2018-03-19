@@ -100,6 +100,66 @@ and then variable:
         "id":1
     }
 
+#### with a fragment, variable, named and directive
+
+    query Membership($id:Int!,$withOwner: Boolean!) {
+        membership(membershipId:$id){
+            ...fullMembership
+        }
+    }
+
+    fragment fullMembership on Membership {
+        membershipId
+        owner @include(if: $withOwner){
+          ...owner
+        }
+        type
+    }
+
+    fragment owner on Person {
+        id
+        names
+        surname  
+    }
+
+and then variable:
+
+    {
+      "id": 1,
+      "withOwner": false
+    }
+
+#### with a fragment, variable, named, directive and default value
+
+    query Membership($id:Int!,$withOwner: Boolean!,$noId: Boolean = false) {
+        membership(membershipId:$id){
+            ...fullMembership
+        }
+    }
+
+    fragment fullMembership on Membership {
+        membershipId @skip(if: $noId)
+        owner @include(if: $withOwner){
+          ...owner
+        }
+        type
+    }
+
+    fragment owner on Person {
+        id @skip(if: $noId)
+        names
+        surname  
+    }
+
+and then variable:
+
+    {
+      "id": 1,
+      "withOwner": true,
+      "noId": true
+    }
+
+
 ### Create a new member:
 
     mutation CreateMember {

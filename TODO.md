@@ -1,6 +1,5 @@
 # TODO
 
-* Directives
 * Pagination
 * Subscriptions
 * Add client in Test

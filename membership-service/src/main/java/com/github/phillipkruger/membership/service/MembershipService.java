@@ -42,7 +42,7 @@ public class MembershipService {
         return membership;
     }
     
-    @GraphQLQuery(name = "memberships")
+    @GraphQLQuery(name = "memberships") 
     public List<Membership> getAllMemberships() {
         return getAllMemberships(Optional.empty());
     }

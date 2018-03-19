@@ -30,7 +30,9 @@ public class MembershipGraphQLApi implements ServletContextListener {
                 .generate();
         
         SimpleGraphQLServlet.Builder builder = SimpleGraphQLServlet.builder(schema)
-                .withGraphQLErrorHandler(new MembershipErrorHandler());
+                .withGraphQLErrorHandler(new MembershipErrorHandler())
+                //.withInstrumentation(new FieldValidationInstrumentation(new SimpleFieldValidation()))
+                ;
         
         SimpleGraphQLServlet graphQLServlet = builder.build();
         
