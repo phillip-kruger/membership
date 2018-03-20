@@ -29,9 +29,12 @@ public class MembershipGraphQLApi implements ServletContextListener {
                 .withOperationsFromSingleton(membershipService,MembershipService.class)
                 .generate();
         
+        
+        
         SimpleGraphQLServlet.Builder builder = SimpleGraphQLServlet.builder(schema)
                 .withGraphQLErrorHandler(new MembershipErrorHandler())
                 //.withInstrumentation(new FieldValidationInstrumentation(new SimpleFieldValidation()))
+                
                 ;
         
         SimpleGraphQLServlet graphQLServlet = builder.build();
@@ -47,6 +50,6 @@ public class MembershipGraphQLApi implements ServletContextListener {
     public void contextDestroyed(ServletContextEvent sce) {}
     
     private static final String SERVLET_NAME = "MembershipGraphQLServlet";
-    private static final String[] SERVLET_URL = new String[]{"/graphql"};
+    private static final String[] SERVLET_URL = new String[]{"/graphql/*"};
     
 }
