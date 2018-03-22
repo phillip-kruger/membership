@@ -48,12 +48,25 @@ public class MembershipService {
     }
     
     @GraphQLQuery(name = "memberships")
-    public List<Membership> getAllMemberships(Optional<MembershipFilter> filter) {
+    public List<Membership> getAllMemberships(Optional<MembershipFilter> filter){
+        return getAllMemberships(filter,Optional.empty(),Optional.empty());
+    }
+    
+    @GraphQLQuery(name = "memberships")
+    public List<Membership> getAllMemberships(@GraphQLArgument(name = "skip") Optional<Integer> skip,
+                                            @GraphQLArgument(name = "first") Optional<Integer> first){
+        return getAllMemberships(Optional.empty(),skip,first);
+    }
+    
+    @GraphQLQuery(name = "memberships")
+    public List<Membership> getAllMemberships(Optional<MembershipFilter> filter,
+                                @GraphQLArgument(name = "skip") Optional<Integer> skip,
+                                @GraphQLArgument(name = "first") Optional<Integer> first) {
         if(!filter.isPresent()){
-            return em.createNamedQuery(Membership.QUERY_FIND_ALL, Membership.class).getResultList();
-        }else{
+            return allMemberships(skip,first);
+        }else {
             MembershipFilter membershipFilter = filter.get();
-            return findMemberships(membershipFilter);
+            return findMemberships(membershipFilter,skip,first);
         }
     }
     
@@ -62,9 +75,16 @@ public class MembershipService {
         return em.find(Membership.class,id);
     }
     
+    private List<Membership> allMemberships(Optional<Integer> skip,Optional<Integer> first){
+        TypedQuery<Membership> query = em.createNamedQuery(Membership.QUERY_FIND_ALL, Membership.class);
+        if(skip.isPresent())query.setFirstResult(skip.get());
+        if(first.isPresent())query.setMaxResults(first.get());
+        return query.getResultList();
+    }
+    
     // TODO: Get this to work with CriteriaBuilder
     // @see http://www.baeldung.com/rest-search-language-spring-jpa-criteria
-    private List<Membership> findMemberships(MembershipFilter filter){
+    private List<Membership> findMemberships(MembershipFilter filter,Optional<Integer> skip,Optional<Integer> first){
         StringWriter queryWriter = new StringWriter();
         queryWriter.write("SELECT m FROM Membership m");
         
@@ -90,13 +110,14 @@ public class MembershipService {
         
         String q = queryWriter.toString();
         
-        log.log(Level.INFO, "JPA QUERY [{0}]", q);
-        
         TypedQuery<Membership> typedQuery = em.createQuery(q, Membership.class);
         
         for(Map.Entry<String, Object> param : params.entrySet()){
             typedQuery.setParameter(param.getKey(), param.getValue());
         }
+        
+        if(skip.isPresent())typedQuery.setFirstResult(skip.get());
+        if(first.isPresent())typedQuery.setMaxResults(first.get());
         
         List<Membership> memberships = typedQuery.getResultList();
             

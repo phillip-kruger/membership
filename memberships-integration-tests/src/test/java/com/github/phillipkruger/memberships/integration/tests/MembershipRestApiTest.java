@@ -18,9 +18,11 @@ import javax.xml.bind.Unmarshaller;
 import lombok.extern.java.Log;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+//@Ignore
 @Log
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MembershipRestApiTest {

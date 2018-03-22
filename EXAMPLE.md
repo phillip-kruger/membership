@@ -159,7 +159,29 @@ and then variable:
       "noId": true
     }
 
+### Pagination
 
+    query Memberships($itemsPerPage:Int!,$pageNumber:Int!) {
+        memberships(
+            first:$itemsPerPage,
+                skip:$pageNumber) {
+            membershipId
+                owner{
+                    names
+                    surname
+                }
+            type
+        }
+    }
+
+and then variables:
+
+    {
+      "itemsPerPage": 1,
+      "pageNumber": 0
+    }
+
+increase the pageNumber variable to page
 ### Create a new member:
 
     mutation CreateMember {
