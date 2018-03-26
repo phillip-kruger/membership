@@ -77,8 +77,7 @@ public class MembershipService {
     
     private List<Membership> allMemberships(Optional<Integer> skip,Optional<Integer> first){
         TypedQuery<Membership> query = em.createNamedQuery(Membership.QUERY_FIND_ALL, Membership.class);
-        if(skip.isPresent())query.setFirstResult(skip.get());
-        if(first.isPresent())query.setMaxResults(first.get());
+        setPaging(query,skip,first);
         return query.getResultList();
     }
     
@@ -116,12 +115,25 @@ public class MembershipService {
             typedQuery.setParameter(param.getKey(), param.getValue());
         }
         
-        if(skip.isPresent())typedQuery.setFirstResult(skip.get());
-        if(first.isPresent())typedQuery.setMaxResults(first.get());
+        setPaging(typedQuery,skip,first);
         
         List<Membership> memberships = typedQuery.getResultList();
             
         return memberships;
+    }
+    
+    private void setPaging(TypedQuery<Membership> typedQuery,Optional<Integer> optionalPageNumber,Optional<Integer> optionalPageSize){
+        
+        int pageNumber = 1;
+        int pageSize = Integer.MAX_VALUE;
+        
+        
+        if(optionalPageNumber.isPresent())pageNumber = optionalPageNumber.get();
+        if(optionalPageSize.isPresent())pageSize = optionalPageSize.get();    
+        
+        typedQuery.setFirstResult((pageNumber-1) * pageSize); 
+        typedQuery.setMaxResults(pageSize);
+        
     }
     
     private static final String PERSENTAGE = "%";
