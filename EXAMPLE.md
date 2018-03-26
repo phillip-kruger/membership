@@ -199,7 +199,7 @@ increase the pageNumber variable to page
 #### with a fragment:
 
     mutation CreateMember {
-        createMembership(membership: {type:FULL,owner: {names: "Minki",surname:"van der Westhuizen"}}) {
+        createMembership(membership: {type:FULL,owner: {names: "James",surname:"Small"}}) {
             ...fullMembership
         }
     }
@@ -294,9 +294,23 @@ and then variable:
 ### Exceptions
 
     mutation CreateMember($membership: MembershipInput!) {
-        membership(membership:$membership) {
+        createMembership(membership:$membership) {
             ...fullMembership
         }
+    }
+
+    fragment fullMembership on Membership {
+        membershipId
+        owner{
+            ...owner
+        }
+        type
+    }
+
+    fragment owner on Person {
+        id
+        names
+        surname  
     }
 
 and then variable:
@@ -309,7 +323,7 @@ and then variable:
             },
             "type": "FULL"
         }
-    }   
+    }     
 
 ## Introspection
 
