@@ -178,7 +178,7 @@ and then variables:
 
     {
       "itemsPerPage": 1,
-      "pageNumber": 0
+      "pageNumber": 1
     }
 
 increase the pageNumber variable to page
