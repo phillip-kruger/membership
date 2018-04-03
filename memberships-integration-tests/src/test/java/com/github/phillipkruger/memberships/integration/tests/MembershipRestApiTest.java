@@ -18,33 +18,14 @@ import javax.xml.bind.Unmarshaller;
 import lombok.extern.java.Log;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-//@Ignore
 @Log
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MembershipRestApiTest {
     
     private static final String CONTENT_ROOT = "/membership-service/rest/";
-    
-    @Test
-    public void a_ping(){
-
-        Response r = 
-                given().
-                    contentType("text/plain").
-                when().
-                    get(CONTENT_ROOT + "ping").
-                thenReturn();
-                
-        ResponseBody body = r.getBody();
-        String s = body.asString();
-        
-        Assert.assertEquals("pong", s);
-        
-    }
     
     @Test
     public void b_testJoinMember(){

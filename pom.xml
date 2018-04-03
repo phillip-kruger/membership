@@ -71,7 +71,6 @@
         <!-- JEE Platform -->        
         <javaee.version>7.0</javaee.version>
         <lombok.version>1.16.20</lombok.version>
-        <graphql-annotations.version>5.2</graphql-annotations.version>
     </properties>
     
     <dependencies>

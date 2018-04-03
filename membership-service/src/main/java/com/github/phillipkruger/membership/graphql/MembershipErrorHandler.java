@@ -11,7 +11,7 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
-public class MembershipErrorHandler implements GraphQLErrorHandler{
+public class MembershipErrorHandler implements GraphQLErrorHandler {
 
     @Override
     public List<GraphQLError> processErrors(List<GraphQLError> errors) {

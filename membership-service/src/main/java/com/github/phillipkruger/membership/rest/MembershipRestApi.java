@@ -2,6 +2,8 @@ package com.github.phillipkruger.membership.rest;
 
 import com.github.phillipkruger.membership.Membership;
 import com.github.phillipkruger.membership.service.MembershipService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
@@ -20,34 +22,29 @@ import lombok.extern.java.Log;
  */
 @Log
 @Path("/")
+@Consumes(MediaType.APPLICATION_JSON) @Produces(MediaType.APPLICATION_JSON)
+@Api(value = "Membership service")
 public class MembershipRestApi {
     
     @Inject
     private MembershipService membershipService;
     
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @ApiOperation(value = "Retrieve all memberships", notes = "This will return a list of membership objects to the client",response = Membership.class)
     public List<Membership> getAllMemberships(){
         return membershipService.getAllMemberships();
     }
     
     @GET @Path("{id}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @ApiOperation(value = "Retrieve a membership", notes = "This will return a certain membership objects to the client",response = Membership.class)
     public Membership getMembership(@NotNull @PathParam(value = "id") int id){
         return membershipService.getMembership(id);
     }
     
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
+    @ApiOperation(value = "Create a membership", notes = "This will create a membership ")
     public void joinMember(@NotNull Membership membership) {
         membershipService.createMembership(membership);
-    }
-    
-    @GET @Path("ping")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String ping(){
-        log.severe("ping->pong");
-        return "pong";
     }
     
 }

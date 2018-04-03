@@ -46,11 +46,16 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        
         <dependency>
             <groupId>com.graphql-java</groupId>
             <artifactId>graphql-java-servlet</artifactId>
             <version>4.7.0</version>
             <exclusions>
+                <exclusion>
+                    <groupId>com.graphql-java</groupId>
+                    <artifactId>graphql-java</artifactId>
+                </exclusion>
                 <exclusion>
                     <groupId>javax.servlet</groupId>
                     <artifactId>javax.servlet-api</artifactId>
@@ -87,6 +92,12 @@
             <scope>runtime</scope>
         </dependency>
         
+        <!-- Apiee -->
+        <dependency>
+            <groupId>com.github.phillip-kruger</groupId>
+            <artifactId>apiee-core</artifactId>
+            <version>1.0.5</version>
+        </dependency>
     </dependencies>
         
 </project>
