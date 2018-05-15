@@ -36,6 +36,7 @@ The server is now up and running with some test data populated (see resources/ME
 
 ### Available endpoints:
 
+* Front page : http://localhost:8080/membership/
 * Swagger UI : http://localhost:8080/membership/rest/openapi-ui/
 * GraphiQL   : http://localhost:8080/membership/graph/graphiql/
 

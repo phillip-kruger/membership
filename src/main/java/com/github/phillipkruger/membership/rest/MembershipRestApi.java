@@ -39,16 +39,19 @@ public class MembershipRestApi {
     }
     
     @GET @Path("{id}")
+    @Operation(description = "Get a certain membership")
     public Membership getMembership(@NotNull @PathParam(value = "id") int id){
         return membershipService.getMembership(id);
     }
     
     @POST
+    @Operation(description = "Create a new membership")
     public void joinMember(@NotNull Membership membership) {
         membershipService.createMembership(membership);
     }
     
     @DELETE @Path("{id}")
+    @Operation(description = "Create a existing membership")
     public void deleteMember(@NotNull @PathParam(value = "id") int id){
         membershipService.deleteMembership(id);
     }
