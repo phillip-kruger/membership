@@ -26,39 +26,19 @@ Get the source:
     git clone https://github.com/phillip-kruger/membership.git
     cd membership
 
-Build:
+Build and start wildfly-swarm:
 
-    mvn clean install -pl membership-service -am
-
-Start wildfly-swarm:
-
-    cd membership-service
-    mvn -Pwildfly-swarm-start clean install
-
-Populate test data:
-
-    cd ../memberships-integration-tests
     mvn clean install
 
-### Create fat release (optional)
-    
-    cd ../membership-service
-    mvn -Pwildfly-swarm-package clean install
-    
-Distributable jar file is:
-    
-    target/membership-service-swarm.jar
+(This does a java -jar membership-swarm.jar)
 
-To run :
+The server is now up and running with some test data populated (see resources/META-INF/load.sql)
 
-    java -jar membership-service-swarm.jar
+### Available endpoints:
+
+* Swagger UI : http://localhost:8080/membership/rest/openapi-ui/
+* GraphiQL   : http://localhost:8080/membership/graph/graphiql/
 
 ### Run some examples:
 
-In the [GraphiQL](http://localhost:8080/membership-service/) GUI try out some of the [examples](EXAMPLE.md)
-
-## Links:
-
-* Example get all Ids:  http://localhost:8080/membership-service/graphql?query={memberships{membershipId}}
-* Example REST get all: http://localhost:8080/membership-service/rest
-* [TODO](TODO.md)
+In the [GraphiQL](http://localhost:8080/membership/graph/graphiql/) GUI try out some of the [examples](EXAMPLE.md)
