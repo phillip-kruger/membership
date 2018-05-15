@@ -148,18 +148,18 @@
                     <groupId>com.fasterxml.jackson.datatype</groupId>
                     <artifactId>jackson-datatype-jsr310</artifactId>
                 </exclusion>
-<!--                <exclusion>
+                <exclusion>
                     <groupId>com.fasterxml.jackson.datatype</groupId>
                     <artifactId>jackson-datatype-jdk8</artifactId>
-                </exclusion>-->
+                </exclusion>
                 <exclusion>
                     <groupId>com.fasterxml.jackson.core</groupId>
                     <artifactId>jackson-databind</artifactId>
                 </exclusion>
-<!--                <exclusion>
+                <exclusion>
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-api</artifactId>
-                </exclusion>-->
+                </exclusion>
                 <exclusion>
                     <groupId>org.ow2.asm</groupId>
                     <artifactId>asm-tree</artifactId>
@@ -184,10 +184,10 @@
             <artifactId>graphql-java</artifactId>
             <version>${graphql-java.version}</version>
             <exclusions>
-<!--                <exclusion>
+                <exclusion>
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-api</artifactId>
-                </exclusion>-->
+                </exclusion>
                 <exclusion>
                     <groupId>com.graphql-java</groupId>
                     <artifactId>java-dataloader</artifactId>
@@ -208,10 +208,10 @@
                     <groupId>javax.servlet</groupId>
                     <artifactId>javax.servlet-api</artifactId>
                 </exclusion>
-<!--                <exclusion>
+                <exclusion>
                     <groupId>com.fasterxml.jackson.datatype</groupId>
                     <artifactId>jackson-datatype-jdk8</artifactId>
-                </exclusion>-->
+                </exclusion>
                 <exclusion>
                     <groupId>com.fasterxml.jackson.core</groupId>
                     <artifactId>jackson-databind</artifactId>
@@ -224,10 +224,10 @@
                     <groupId>com.fasterxml.jackson.core</groupId>
                     <artifactId>jackson-annotations</artifactId>
                 </exclusion>
-<!--                <exclusion>
+                <exclusion>
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-api</artifactId>
-                </exclusion>-->
+                </exclusion>
                 
             </exclusions>
         </dependency>
@@ -263,36 +263,6 @@
                     </compilerArgs>
                 </configuration>
             </plugin>
-        
-<!--            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>3.0.0</version>
-                <executions>
-                    <execution>
-                        <id>add-resource</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>add-resource</goal>
-                        </goals>
-                        <configuration>
-
-                            <resources>
-                                 Wildfly-swarm config 
-                                <resource>
-                                    <directory>${wildfly-swarm.configDir}</directory>
-                                    <targetPath>${project.build.directory}</targetPath>
-                                    <filtering>true</filtering>
-                                    <includes>
-                                        <include>standalone.xml</include>
-                                    </includes>
-                                </resource>
-                            </resources>
-
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>-->
             
             <plugin>
                 <groupId>org.wildfly.swarm</groupId>
@@ -346,6 +316,4 @@
         </plugins>
     </build>
     
-    
-        
 </project>
