@@ -69,9 +69,9 @@
         
         <!-- GraphQL libs -->
         <graphiql.version>0.11.5</graphiql.version>
-        <spqr.version>0.9.6</spqr.version>
-        <graphql-java.version>7.0</graphql-java.version>
-        <graphql-java-servlet.version>4.7.0</graphql-java-servlet.version>
+        <spqr.version>0.9.7</spqr.version>
+        <graphql-java.version>8.0</graphql-java.version>
+        <graphql-java-servlet.version>5.0.0</graphql-java-servlet.version>
         
         <!-- wildfly-swarm properties -->
         <debug.port>5005</debug.port>
@@ -122,13 +122,12 @@
             <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
-
+        <!-- Database -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>${h2.version}</version>
         </dependency>
-        
         
         <!-- GraphQL annotations -->
         <dependency>
@@ -178,7 +177,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        
+        <!-- GraphQL java -->
         <dependency>
             <groupId>com.graphql-java</groupId>
             <artifactId>graphql-java</artifactId>
@@ -194,7 +193,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        
+        <!-- GraphQL servlet -->
         <dependency>
             <groupId>com.graphql-java</groupId>
             <artifactId>graphql-java-servlet</artifactId>
