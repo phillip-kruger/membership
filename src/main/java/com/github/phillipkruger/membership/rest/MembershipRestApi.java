@@ -1,8 +1,6 @@
 package com.github.phillipkruger.membership.rest;
 
 import com.github.phillipkruger.membership.Membership;
-import com.github.phillipkruger.membership.Person;
-import com.github.phillipkruger.membership.Type;
 import com.github.phillipkruger.membership.service.MembershipService;
 import java.util.List;
 import javax.inject.Inject;

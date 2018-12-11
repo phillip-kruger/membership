@@ -1,0 +1,5 @@
+thorntail:
+    logging:
+        loggers:
+            com.github.phillipkruger:
+                level: FINEST

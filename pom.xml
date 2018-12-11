@@ -62,7 +62,7 @@
         <javaee.version>7.0</javaee.version>
         <microProfile.version>1.3</microProfile.version>
             
-        <lombok.version>1.16.20</lombok.version>
+        <lombok.version>1.18.4</lombok.version>
         
         <!-- Database -->
         <h2.version>1.4.197</h2.version>
@@ -73,16 +73,6 @@
         <graphql-java.version>8.0</graphql-java.version>
         <graphql-java-servlet.version>5.0.0</graphql-java-servlet.version>
         
-        <!-- wildfly-swarm properties -->
-        <debug.port>5005</debug.port>
-        <wildfly-swarm.version>2018.4.1</wildfly-swarm.version> <!-- v2018.5.0 does not work ! -->
-        <wildfly-swarm.http.port>8080</wildfly-swarm.http.port>
-        <wildfly-swarm.https.port>8443</wildfly-swarm.https.port>
-        <wildfly-swarm.installDir>${java.io.tmpdir}${file.separator}${project.artifactId}${file.separator}wildfly-swarm</wildfly-swarm.installDir>
-        <wildfly-swarm.deployDir>${wildfly-swarm.installDir}${file.separator}deployments</wildfly-swarm.deployDir>
-        <wildfly-swarm.configDir>${basedir}${file.separator}src${file.separator}main${file.separator}wildfly-swarm${file.separator}config</wildfly-swarm.configDir>
-        <wildfly-swarm.logsDir>${wildfly-swarm.installDir}${file.separator}logs</wildfly-swarm.logsDir>
-        <wildfly-swarm.logfile>${wildfly-swarm.logsDir}${file.separator}server.log</wildfly-swarm.logfile>
         <log.name>com.github.phillipkruger</log.name>
         <log.level>FINEST</log.level>
         
@@ -91,11 +81,25 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.wildfly.swarm</groupId>
-                <artifactId>bom-all</artifactId>
-                <version>${wildfly-swarm.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
+                <groupId>io.leangen.graphql</groupId>
+                <artifactId>spqr</artifactId>
+                <version>${spqr.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.graphql-java</groupId>
+                <artifactId>graphql-java</artifactId>
+                <version>${graphql-java.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.graphql-java</groupId>
+                <artifactId>graphql-java-servlet</artifactId>
+                <version>${graphql-java-servlet.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars.bower</groupId>
+                <artifactId>graphiql</artifactId>
+                <version>${graphiql.version}</version>
+                <scope>runtime</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -128,122 +132,34 @@
             <artifactId>h2</artifactId>
             <version>${h2.version}</version>
         </dependency>
-        
         <!-- GraphQL annotations -->
         <dependency>
             <groupId>io.leangen.graphql</groupId>
             <artifactId>spqr</artifactId>
-            <version>${spqr.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.fasterxml.jackson.core</groupId>
-                    <artifactId>jackson-annotations</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.fasterxml.jackson.module</groupId>
-                    <artifactId>jackson-module-parameter-names</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.fasterxml.jackson.datatype</groupId>
-                    <artifactId>jackson-datatype-jsr310</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.fasterxml.jackson.datatype</groupId>
-                    <artifactId>jackson-datatype-jdk8</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.fasterxml.jackson.core</groupId>
-                    <artifactId>jackson-databind</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.ow2.asm</groupId>
-                    <artifactId>asm-tree</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.ow2.asm</groupId>
-                    <artifactId>asm</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.ow2.asm</groupId>
-                    <artifactId>asm-commons</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.graphql-java</groupId>
-                    <artifactId>java-dataloader</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <!-- GraphQL java -->
         <dependency>
             <groupId>com.graphql-java</groupId>
             <artifactId>graphql-java</artifactId>
-            <version>${graphql-java.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.graphql-java</groupId>
-                    <artifactId>java-dataloader</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <!-- GraphQL servlet -->
         <dependency>
             <groupId>com.graphql-java</groupId>
             <artifactId>graphql-java-servlet</artifactId>
-            <version>${graphql-java-servlet.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.graphql-java</groupId>
-                    <artifactId>graphql-java</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>javax.servlet</groupId>
-                    <artifactId>javax.servlet-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.fasterxml.jackson.datatype</groupId>
-                    <artifactId>jackson-datatype-jdk8</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.fasterxml.jackson.core</groupId>
-                    <artifactId>jackson-databind</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.fasterxml.jackson.core</groupId>
-                    <artifactId>jackson-core</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.fasterxml.jackson.core</groupId>
-                    <artifactId>jackson-annotations</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-                
-            </exclusions>
         </dependency>
-        
         <!-- GraphiQL -->
         <dependency>
             <groupId>org.webjars.bower</groupId>
             <artifactId>graphiql</artifactId>
-            <version>${graphiql.version}</version>
             <scope>runtime</scope>
         </dependency>
         
         <!-- Swagger UI -->
         <dependency>
-            <groupId>com.github.phillip-kruger.microprofile-extentions</groupId>
-            <artifactId>openapi-ext</artifactId>
-            <version>1.0.4</version>
+            <groupId>org.microprofile-ext.openapi-ext</groupId>
+            <artifactId>swagger-ui</artifactId>
+            <version>1.0.1</version>
+            <scope>runtime</scope>
         </dependency>
         
     </dependencies>
@@ -262,57 +178,495 @@
                     </compilerArgs>
                 </configuration>
             </plugin>
-            
-            <plugin>
-                <groupId>org.wildfly.swarm</groupId>
-                <artifactId>wildfly-swarm-plugin</artifactId>
-                <version>${wildfly-swarm.version}</version>
-                
-                <configuration>
-                    <properties>
-                        <swarm.context.path>/${project.artifactId}</swarm.context.path>
-                        <swarm.http.port>${wildfly-swarm.http.port}</swarm.http.port>
-                        <swarm.https.port>${wildfly-swarm.https.port}</swarm.https.port>
-                        <swarm.management.http.port>2${wildfly-swarm.http.port}</swarm.management.http.port> 
-                        <swarm.management.https.port>2${wildfly-swarm.https.port}</swarm.management.https.port>
-                    </properties>
-                    <fractions>microprofile-openapi</fractions>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>1</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>package</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.6.0</version>
-                <executions>
-                    <execution>
-                        <id>1</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <executable>java</executable>
-                    <arguments>
-                        <argument>-jar</argument>
-                        <argument>-Xdebug</argument>
-                        <argument>-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=${debug.port}</argument>
-                        <argument>${project.build.directory}${file.separator}${project.artifactId}-swarm.jar</argument>
-                    </arguments>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
+    
+    <profiles>
+        
+        <!-- Run Thorntail -->
+        <profile>
+            <id>thorntail</id>
+            <activation>
+                <property>
+                    <name>thorntail</name>
+                </property>
+            </activation>
+            
+            <properties>
+                <thorntail.version>2.2.1.Final</thorntail.version>
+                <thorntail.configDir>${basedir}${file.separator}src${file.separator}main${file.separator}resources</thorntail.configDir>
+            </properties>
+            
+            <dependencies>
+                <!-- GraphQL annotations -->
+                <dependency>
+                    <groupId>io.leangen.graphql</groupId>
+                    <artifactId>spqr</artifactId>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>com.fasterxml.jackson.core</groupId>
+                            <artifactId>jackson-annotations</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>com.fasterxml.jackson.module</groupId>
+                            <artifactId>jackson-module-parameter-names</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>com.fasterxml.jackson.datatype</groupId>
+                            <artifactId>jackson-datatype-jsr310</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>com.fasterxml.jackson.datatype</groupId>
+                            <artifactId>jackson-datatype-jdk8</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>com.fasterxml.jackson.core</groupId>
+                            <artifactId>jackson-databind</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.slf4j</groupId>
+                            <artifactId>slf4j-api</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.ow2.asm</groupId>
+                            <artifactId>asm-tree</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.ow2.asm</groupId>
+                            <artifactId>asm</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.ow2.asm</groupId>
+                            <artifactId>asm-commons</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>com.graphql-java</groupId>
+                            <artifactId>java-dataloader</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+                <!-- GraphQL java -->
+                <dependency>
+                    <groupId>com.graphql-java</groupId>
+                    <artifactId>graphql-java</artifactId>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>org.slf4j</groupId>
+                            <artifactId>slf4j-api</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>com.graphql-java</groupId>
+                            <artifactId>java-dataloader</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+                <!-- GraphQL servlet -->
+                <dependency>
+                    <groupId>com.graphql-java</groupId>
+                    <artifactId>graphql-java-servlet</artifactId>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>com.graphql-java</groupId>
+                            <artifactId>graphql-java</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>javax.servlet</groupId>
+                            <artifactId>javax.servlet-api</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>com.fasterxml.jackson.datatype</groupId>
+                            <artifactId>jackson-datatype-jdk8</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>com.fasterxml.jackson.core</groupId>
+                            <artifactId>jackson-databind</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>com.fasterxml.jackson.core</groupId>
+                            <artifactId>jackson-core</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>com.fasterxml.jackson.core</groupId>
+                            <artifactId>jackson-annotations</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.slf4j</groupId>
+                            <artifactId>slf4j-api</artifactId>
+                        </exclusion>
+
+                    </exclusions>
+                </dependency>
+            </dependencies>
+            
+            <build>
+                <plugins>
+
+                    <!--To configure thorntail--> 
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <executions>
+                            <execution>
+                                <id>add-resource</id>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>add-resource</goal>
+                                </goals>
+                                <configuration>
+                                    <resources>
+                                         <!--thorntail config--> 
+                                        <resource>
+                                            <directory>${thorntail.configDir}</directory>
+                                            <targetPath>${project.build.directory}</targetPath>
+                                            <filtering>true</filtering>
+                                            <includes>
+                                                <include>project*.yml</include>
+                                                <include>*.properties</include>
+                                            </includes>
+                                        </resource>
+
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>io.thorntail</groupId>
+                        <artifactId>thorntail-maven-plugin</artifactId>
+                        <version>${thorntail.version}</version>
+                        <executions>
+                            <execution>
+                                <id>2</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>package</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <properties>
+                                <thorntail.context.path>/${project.build.finalName}</thorntail.context.path>
+                            </properties>
+                        </configuration>
+                    </plugin>
+                    
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.6.0</version>
+                        <executions>
+                            <execution>
+                                <id>1</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>java</executable>
+                                    <arguments>
+                                        <argument>-jar</argument>
+                                        <argument>${project.build.directory}${file.separator}${project.build.finalName}-thorntail.jar</argument>
+                                        <argument>-s</argument>
+                                        <argument>${project.build.directory}${file.separator}project-defaults.yml</argument>
+                                        <argument>-Sdev</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        
+                    </plugin>
+
+                </plugins>
+            </build>
+            
+        </profile>
+        
+        <!-- Run Payara micro -->
+        <profile>
+            <id>payara</id>
+            <activation>
+                <property>
+                    <name>payara</name>
+                </property>
+            </activation>
+            
+            <properties>
+                <!-- payara-micro properties -->
+                <payara-micro.maven.version>1.0.2</payara-micro.maven.version>
+                <payara-micro.version>5.184</payara-micro.version>
+                <payara-micro.installDir>${java.io.tmpdir}${file.separator}${project.artifactId}${file.separator}payara-micro</payara-micro.installDir>
+                <payara-micro.configDir>${basedir}${file.separator}src${file.separator}main${file.separator}payara-micro${file.separator}config</payara-micro.configDir>
+                <payara-micro.logsDir>${payara-micro.installDir}${file.separator}logs</payara-micro.logsDir>
+                <payara-micro.logfile>${payara-micro.logsDir}${file.separator}server.log</payara-micro.logfile>
+            </properties>
+            
+            <dependencyManagement>
+                <dependencies>
+                    <dependency>
+                        <groupId>fish.payara.extras</groupId>
+                        <artifactId>payara-micro</artifactId>
+                        <version>${payara-micro.version}</version>
+                        <scope>provided</scope>
+                    </dependency>
+                </dependencies>
+            </dependencyManagement>
+            
+            <dependencies>
+                <!-- Payara -->
+                <dependency>
+                    <groupId>fish.payara.extras</groupId>
+                    <artifactId>payara-micro</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+                <!-- GraphQL annotations -->
+                <dependency>
+                    <groupId>io.leangen.graphql</groupId>
+                    <artifactId>spqr</artifactId>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>com.graphql-java</groupId>
+                            <artifactId>java-dataloader</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+                <!-- GraphQL java -->
+                <dependency>
+                    <groupId>com.graphql-java</groupId>
+                    <artifactId>graphql-java</artifactId>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>com.graphql-java</groupId>
+                            <artifactId>java-dataloader</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+                <!-- GraphQL servlet -->
+                <dependency>
+                    <groupId>com.graphql-java</groupId>
+                    <artifactId>graphql-java-servlet</artifactId>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>javax.servlet</groupId>
+                            <artifactId>javax.servlet-api</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+            </dependencies>
+            
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>fish.payara.maven.plugins</groupId>
+                        <artifactId>payara-micro-maven-plugin</artifactId>
+                        <version>${payara-micro.maven.version}</version>
+                        
+                        <configuration>
+                            <artifactItem>
+                                <groupId>fish.payara.extras</groupId>
+                                <artifactId>payara-micro</artifactId>
+                                <version>${payara-micro.version}</version>
+                            </artifactItem>
+                            <payaraVersion>${payara-micro.version}</payaraVersion>
+                            <commandLineOptions>
+                                <option>
+                                    <key>--rootdir</key>
+                                    <value>${payara-micro.installDir}</value>
+                                </option>
+                            </commandLineOptions>
+                            
+                            <deployArtifacts>
+                                <artifactItem>
+                                    <groupId>${project.groupId}</groupId>
+                                    <artifactId>${project.artifactId}</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>${project.packaging}</type>
+                                </artifactItem>                       
+                            </deployArtifacts>
+                        
+                            <useUberJar>false</useUberJar>
+                            <daemon>false</daemon>
+                            <deployWar>true</deployWar>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>1</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>start</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+            
+        </profile>
+        
+        <!-- Run OpenLiberty -->
+        <profile>
+            <id>openliberty</id>
+            <activation>
+                <property>
+                    <name>openliberty</name>
+                </property>
+            </activation>
+            
+            <properties>
+                <log.name>com.github.phillipkruger</log.name>
+                <log.level>FINEST</log.level>
+                <openliberty.version>18.0.0.3</openliberty.version>
+                <openliberty.http.port>8080</openliberty.http.port>
+                <openliberty.https.port>8443</openliberty.https.port>
+                <openliberty.installDir>${java.io.tmpdir}${file.separator}${project.artifactId}${file.separator}openliberty</openliberty.installDir>
+                <openliberty.configDir>${basedir}${file.separator}src${file.separator}main${file.separator}openliberty${file.separator}config</openliberty.configDir>
+                <openliberty.logsDir>${openliberty.installDir}${file.separator}wlp${file.separator}usr${file.separator}servers${file.separator}defaultServer${file.separator}logs</openliberty.logsDir>
+                <openliberty.maven.version>2.6</openliberty.maven.version>
+            </properties>
+            
+            <dependencies>
+                <!-- GraphQL annotations -->
+                <dependency>
+                    <groupId>io.leangen.graphql</groupId>
+                    <artifactId>spqr</artifactId>
+                </dependency>
+                <!-- GraphQL java -->
+                <dependency>
+                    <groupId>com.graphql-java</groupId>
+                    <artifactId>graphql-java</artifactId>
+                </dependency>
+                <!-- GraphQL servlet -->
+                <dependency>
+                    <groupId>com.graphql-java</groupId>
+                    <artifactId>graphql-java-servlet</artifactId>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>javax.servlet</groupId>
+                            <artifactId>javax.servlet-api</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+                <dependency>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                    <version>2.9.7</version>
+                </dependency>
+            </dependencies>
+            
+            <build>
+                <plugins>
+                    <!-- Copy config (with resource filter) -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <executions>
+                            <execution>
+                                <id>add-resource</id>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>add-resource</goal>
+                                </goals>
+                                <configuration>
+
+                                    <resources>
+                                        <!-- Open Liberty config -->
+                                        <resource>
+                                            <directory>${openliberty.configDir}</directory>
+                                            <targetPath>${project.build.directory}</targetPath>
+                                            <filtering>true</filtering>
+                                            <includes>
+                                                <include>server.xml</include>
+                                            </includes>
+                                        </resource>
+                                    </resources>
+
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- Open Liberty plugin -->
+
+                    <plugin>
+                        <groupId>net.wasdev.wlp.maven.plugins</groupId>
+                        <artifactId>liberty-maven-plugin</artifactId>
+                        <version>${openliberty.maven.version}</version>
+                        
+                        <configuration>
+                            <assemblyArtifact>
+                                <groupId>io.openliberty</groupId>
+                                <artifactId>openliberty-runtime</artifactId>
+                                <version>${openliberty.version}</version>
+                                <type>zip</type>
+                            </assemblyArtifact>
+                            <configFile>${project.build.directory}${file.separator}server.xml</configFile>
+                        </configuration>
+                        
+                        <executions>
+                            <execution>
+                                <id>1</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>install-server</goal>
+                                    <goal>create-server</goal>
+                                </goals>
+                    
+                                <configuration>
+                                    <configFile>${project.build.directory}${file.separator}server.xml</configFile>
+                                    <serverName>defaultServer</serverName>
+                                    <bootstrapProperties>
+                                        <httpPort>${openliberty.http.port}</httpPort>
+                                        <httpsPort>${openliberty.https.port}</httpsPort>
+                                    </bootstrapProperties>
+                                </configuration>
+                            </execution>
+                            
+                            <execution>
+                                <id>2</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>install-apps</goal>
+                                </goals>
+                    
+                                <configuration>
+                                    <appsDirectory>apps</appsDirectory>
+                                    <stripVersion>true</stripVersion>
+                                    <installAppPackages>project</installAppPackages>
+                                    <looseApplication>true</looseApplication>
+                                    <installDirectory>${project.build.directory}${file.separator}liberty${file.separator}wlp</installDirectory>
+                                    <serverName>defaultServer</serverName>
+                                </configuration>
+                            </execution>
+                            
+                            <execution>
+                                <id>3</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>run-server</goal>    
+                                </goals>
+                    
+                                <configuration>
+                                    <configFile>${project.build.directory}${file.separator}server.xml</configFile>
+                                    <installDirectory>${project.build.directory}${file.separator}liberty${file.separator}wlp</installDirectory>
+                                    <serverName>defaultServer</serverName>
+                                    <bootstrapProperties>
+                                        <httpPort>${openliberty.http.port}</httpPort>
+                                        <httpsPort>${openliberty.https.port}</httpsPort>
+                                    </bootstrapProperties>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        
+                    </plugin>
+
+
+                </plugins>
+            </build>
+            
+        </profile>
+        
+    </profiles>
     
 </project>

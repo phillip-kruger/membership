@@ -14,8 +14,17 @@ import org.eclipse.microprofile.openapi.annotations.servers.Server;
  * @author Phillip Kruger (phillip.kruger@phillip-kruger.com)
  */
 @ApplicationPath("/rest")
-@OpenAPIDefinition(info = @Info(title = "GraphQL Demo", version = "1.0.0",contact = @Contact(name = "Phillip Kruger", email = "phillip.kruger@phillip-kruger.com",url = "http://www.phillip-kruger.com")))
-@Server(url = "/membership")
+@OpenAPIDefinition(
+        info = @Info(
+                title = "GraphQL Demo", 
+                version = "1.0.0",
+                contact = 
+                        @Contact(
+                                name = "Phillip Kruger", 
+                                email = "phillip.kruger@phillip-kruger.com",
+                                url = "http://www.phillip-kruger.com")
+                ),servers = @Server(url = "/membership",description = "Localhost")
+        )
 public class ApplicationConfig extends Application {
 
 }

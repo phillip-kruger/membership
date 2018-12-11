@@ -20,7 +20,7 @@ import lombok.extern.java.Log;
 @Stateless
 public class MembershipService {
     
-    @PersistenceContext
+    @PersistenceContext(name = "MembershipDS")
     private EntityManager em;
     
     public Membership createMembership(@NotNull Membership membership){

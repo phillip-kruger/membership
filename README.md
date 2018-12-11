@@ -26,11 +26,19 @@ Get the source:
     git clone https://github.com/phillip-kruger/membership.git
     cd membership
 
-Build and start wildfly-swarm:
 
-    mvn clean install
+This demo runs on Thorntail, OpenLiberty and Payara-micro.
+Build and start:
 
-(This does a java -jar membership-swarm.jar)
+    mvn clean install -Pthorntail
+
+or
+    
+    mvn clean install -Popenliberty
+
+or
+
+    mvn clean install -Ppayara
 
 The server is now up and running with some test data populated (see resources/META-INF/load.sql)
 
