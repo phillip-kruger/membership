@@ -368,6 +368,12 @@
             
         </profile>
         
+        <profile>
+            <id>openshift</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
     </profiles>
     
 </project>
