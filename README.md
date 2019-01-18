@@ -27,18 +27,10 @@ Get the source:
     cd membership
 
 
-This demo runs on Thorntail, OpenLiberty and Payara-micro.
+This demo runs on Thorntail
 Build and start:
 
     mvn clean install -Pthorntail
-
-or
-    
-    mvn clean install -Popenliberty
-
-or
-
-    mvn clean install -Ppayara
 
 The server is now up and running with some test data populated (see resources/META-INF/load.sql)
 
