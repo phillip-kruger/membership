@@ -307,7 +307,7 @@
                 <executions>
                     <execution>
                         <id>2</id>
-                        <phase>pre-integration-test</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>package</goal>
                         </goals>
@@ -332,8 +332,6 @@
                     <name>thorntail</name>
                 </property>
             </activation>
-            
-            
             
             <build>
                 <plugins>
