@@ -76,6 +76,10 @@
         <log.name>com.github.phillipkruger</log.name>
         <log.level>FINEST</log.level>
         
+        
+        <thorntail.version>2.2.1.Final</thorntail.version>
+        <thorntail.configDir>${basedir}${file.separator}src${file.separator}main${file.separator}resources</thorntail.configDir>
+            
     </properties>
     
     <dependencyManagement>
@@ -132,21 +136,7 @@
             <artifactId>h2</artifactId>
             <version>${h2.version}</version>
         </dependency>
-        <!-- GraphQL annotations -->
-        <dependency>
-            <groupId>io.leangen.graphql</groupId>
-            <artifactId>spqr</artifactId>
-        </dependency>
-        <!-- GraphQL java -->
-        <dependency>
-            <groupId>com.graphql-java</groupId>
-            <artifactId>graphql-java</artifactId>
-        </dependency>
-        <!-- GraphQL servlet -->
-        <dependency>
-            <groupId>com.graphql-java</groupId>
-            <artifactId>graphql-java-servlet</artifactId>
-        </dependency>
+        
         <!-- GraphiQL -->
         <dependency>
             <groupId>org.webjars.bower</groupId>
@@ -161,6 +151,106 @@
             <version>1.0.1</version>
             <scope>runtime</scope>
         </dependency>
+        
+        <!-- GraphQL annotations -->
+        <dependency>
+            <groupId>io.leangen.graphql</groupId>
+            <artifactId>spqr</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.module</groupId>
+                    <artifactId>jackson-module-parameter-names</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.datatype</groupId>
+                    <artifactId>jackson-datatype-jsr310</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.datatype</groupId>
+                    <artifactId>jackson-datatype-jdk8</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.ow2.asm</groupId>
+                    <artifactId>asm-tree</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.ow2.asm</groupId>
+                    <artifactId>asm</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.ow2.asm</groupId>
+                    <artifactId>asm-commons</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.graphql-java</groupId>
+                    <artifactId>java-dataloader</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- GraphQL java -->
+        <dependency>
+            <groupId>com.graphql-java</groupId>
+            <artifactId>graphql-java</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.graphql-java</groupId>
+                    <artifactId>java-dataloader</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- GraphQL servlet -->
+        <dependency>
+            <groupId>com.graphql-java</groupId>
+            <artifactId>graphql-java-servlet</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.graphql-java</groupId>
+                    <artifactId>graphql-java</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>javax.servlet-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.datatype</groupId>
+                    <artifactId>jackson-datatype-jdk8</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+
+            </exclusions>
+        </dependency>
+        
         
     </dependencies>
     
@@ -178,6 +268,57 @@
                     </compilerArgs>
                 </configuration>
             </plugin>
+            
+            <!--To configure thorntail--> 
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>add-resource</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>add-resource</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                 <!--thorntail config--> 
+                                <resource>
+                                    <directory>${thorntail.configDir}</directory>
+                                    <targetPath>${project.build.directory}</targetPath>
+                                    <filtering>true</filtering>
+                                    <includes>
+                                        <include>project*.yml</include>
+                                        <include>*.properties</include>
+                                    </includes>
+                                </resource>
+
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>io.thorntail</groupId>
+                <artifactId>thorntail-maven-plugin</artifactId>
+                <version>${thorntail.version}</version>
+                <executions>
+                    <execution>
+                        <id>2</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <properties>
+                        <thorntail.context.path>/${project.build.finalName}</thorntail.context.path>
+                    </properties>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     
@@ -192,166 +333,10 @@
                 </property>
             </activation>
             
-            <properties>
-                <thorntail.version>2.2.1.Final</thorntail.version>
-                <thorntail.configDir>${basedir}${file.separator}src${file.separator}main${file.separator}resources</thorntail.configDir>
-            </properties>
             
-            <dependencies>
-                <!-- GraphQL annotations -->
-                <dependency>
-                    <groupId>io.leangen.graphql</groupId>
-                    <artifactId>spqr</artifactId>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>com.fasterxml.jackson.core</groupId>
-                            <artifactId>jackson-annotations</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>com.fasterxml.jackson.module</groupId>
-                            <artifactId>jackson-module-parameter-names</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>com.fasterxml.jackson.datatype</groupId>
-                            <artifactId>jackson-datatype-jsr310</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>com.fasterxml.jackson.datatype</groupId>
-                            <artifactId>jackson-datatype-jdk8</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>com.fasterxml.jackson.core</groupId>
-                            <artifactId>jackson-databind</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>org.slf4j</groupId>
-                            <artifactId>slf4j-api</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>org.ow2.asm</groupId>
-                            <artifactId>asm-tree</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>org.ow2.asm</groupId>
-                            <artifactId>asm</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>org.ow2.asm</groupId>
-                            <artifactId>asm-commons</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>com.graphql-java</groupId>
-                            <artifactId>java-dataloader</artifactId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-                <!-- GraphQL java -->
-                <dependency>
-                    <groupId>com.graphql-java</groupId>
-                    <artifactId>graphql-java</artifactId>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>org.slf4j</groupId>
-                            <artifactId>slf4j-api</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>com.graphql-java</groupId>
-                            <artifactId>java-dataloader</artifactId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-                <!-- GraphQL servlet -->
-                <dependency>
-                    <groupId>com.graphql-java</groupId>
-                    <artifactId>graphql-java-servlet</artifactId>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>com.graphql-java</groupId>
-                            <artifactId>graphql-java</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>javax.servlet</groupId>
-                            <artifactId>javax.servlet-api</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>com.fasterxml.jackson.datatype</groupId>
-                            <artifactId>jackson-datatype-jdk8</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>com.fasterxml.jackson.core</groupId>
-                            <artifactId>jackson-databind</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>com.fasterxml.jackson.core</groupId>
-                            <artifactId>jackson-core</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>com.fasterxml.jackson.core</groupId>
-                            <artifactId>jackson-annotations</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>org.slf4j</groupId>
-                            <artifactId>slf4j-api</artifactId>
-                        </exclusion>
-
-                    </exclusions>
-                </dependency>
-            </dependencies>
             
             <build>
                 <plugins>
-
-                    <!--To configure thorntail--> 
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>build-helper-maven-plugin</artifactId>
-                        <version>3.0.0</version>
-                        <executions>
-                            <execution>
-                                <id>add-resource</id>
-                                <phase>generate-resources</phase>
-                                <goals>
-                                    <goal>add-resource</goal>
-                                </goals>
-                                <configuration>
-                                    <resources>
-                                         <!--thorntail config--> 
-                                        <resource>
-                                            <directory>${thorntail.configDir}</directory>
-                                            <targetPath>${project.build.directory}</targetPath>
-                                            <filtering>true</filtering>
-                                            <includes>
-                                                <include>project*.yml</include>
-                                                <include>*.properties</include>
-                                            </includes>
-                                        </resource>
-
-                                    </resources>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>io.thorntail</groupId>
-                        <artifactId>thorntail-maven-plugin</artifactId>
-                        <version>${thorntail.version}</version>
-                        <executions>
-                            <execution>
-                                <id>2</id>
-                                <phase>pre-integration-test</phase>
-                                <goals>
-                                    <goal>package</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <properties>
-                                <thorntail.context.path>/${project.build.finalName}</thorntail.context.path>
-                            </properties>
-                        </configuration>
-                    </plugin>
-                    
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>exec-maven-plugin</artifactId>
@@ -378,181 +363,6 @@
                         
                     </plugin>
 
-                </plugins>
-            </build>
-            
-        </profile>
-        
-        
-        <!-- Openshift -->
-        <profile>
-            <id>openshift</id>
-            <activation>
-                <property>
-                    <name>openshift</name>
-                </property>
-            </activation>
-            
-            <properties>
-                <thorntail.version>2.2.1.Final</thorntail.version>
-                <thorntail.configDir>${basedir}${file.separator}src${file.separator}main${file.separator}resources</thorntail.configDir>
-            </properties>
-            
-            <dependencies>
-                <!-- GraphQL annotations -->
-                <dependency>
-                    <groupId>io.leangen.graphql</groupId>
-                    <artifactId>spqr</artifactId>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>com.fasterxml.jackson.core</groupId>
-                            <artifactId>jackson-annotations</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>com.fasterxml.jackson.module</groupId>
-                            <artifactId>jackson-module-parameter-names</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>com.fasterxml.jackson.datatype</groupId>
-                            <artifactId>jackson-datatype-jsr310</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>com.fasterxml.jackson.datatype</groupId>
-                            <artifactId>jackson-datatype-jdk8</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>com.fasterxml.jackson.core</groupId>
-                            <artifactId>jackson-databind</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>org.slf4j</groupId>
-                            <artifactId>slf4j-api</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>org.ow2.asm</groupId>
-                            <artifactId>asm-tree</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>org.ow2.asm</groupId>
-                            <artifactId>asm</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>org.ow2.asm</groupId>
-                            <artifactId>asm-commons</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>com.graphql-java</groupId>
-                            <artifactId>java-dataloader</artifactId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-                <!-- GraphQL java -->
-                <dependency>
-                    <groupId>com.graphql-java</groupId>
-                    <artifactId>graphql-java</artifactId>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>org.slf4j</groupId>
-                            <artifactId>slf4j-api</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>com.graphql-java</groupId>
-                            <artifactId>java-dataloader</artifactId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-                <!-- GraphQL servlet -->
-                <dependency>
-                    <groupId>com.graphql-java</groupId>
-                    <artifactId>graphql-java-servlet</artifactId>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>com.graphql-java</groupId>
-                            <artifactId>graphql-java</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>javax.servlet</groupId>
-                            <artifactId>javax.servlet-api</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>com.fasterxml.jackson.datatype</groupId>
-                            <artifactId>jackson-datatype-jdk8</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>com.fasterxml.jackson.core</groupId>
-                            <artifactId>jackson-databind</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>com.fasterxml.jackson.core</groupId>
-                            <artifactId>jackson-core</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>com.fasterxml.jackson.core</groupId>
-                            <artifactId>jackson-annotations</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>org.slf4j</groupId>
-                            <artifactId>slf4j-api</artifactId>
-                        </exclusion>
-
-                    </exclusions>
-                </dependency>
-            </dependencies>
-            
-            <build>
-                <plugins>
-
-                    <!--To configure thorntail--> 
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>build-helper-maven-plugin</artifactId>
-                        <version>3.0.0</version>
-                        <executions>
-                            <execution>
-                                <id>add-resource</id>
-                                <phase>generate-resources</phase>
-                                <goals>
-                                    <goal>add-resource</goal>
-                                </goals>
-                                <configuration>
-                                    <resources>
-                                         <!--thorntail config--> 
-                                        <resource>
-                                            <directory>${thorntail.configDir}</directory>
-                                            <targetPath>${project.build.directory}</targetPath>
-                                            <filtering>true</filtering>
-                                            <includes>
-                                                <include>project*.yml</include>
-                                                <include>*.properties</include>
-                                            </includes>
-                                        </resource>
-
-                                    </resources>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>io.thorntail</groupId>
-                        <artifactId>thorntail-maven-plugin</artifactId>
-                        <version>${thorntail.version}</version>
-                        <executions>
-                            <execution>
-                                <id>2</id>
-                                <phase>pre-integration-test</phase>
-                                <goals>
-                                    <goal>package</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <properties>
-                                <thorntail.context.path>/${project.build.finalName}</thorntail.context.path>
-                            </properties>
-                        </configuration>
-                    </plugin>
-                    
                 </plugins>
             </build>
             
