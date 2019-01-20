@@ -2,6 +2,8 @@
 
 This is an example application that demonstrate how to add [GraphQL](http://facebook.github.io/graphql) to your existing JAX-RS Application.
 
+You can play around with an [online demo here](http://bit.ly/gql-demonstration)
+
 This application use these libraries:
 
 * [graphql-java](https://github.com/graphql-java/graphql-java)
