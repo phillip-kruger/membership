@@ -2,8 +2,10 @@ package com.github.phillipkruger.membership.graphql;
 
 import com.github.phillipkruger.membership.Membership;
 import com.github.phillipkruger.membership.MembershipFilter;
+import com.github.phillipkruger.membership.Person;
 import com.github.phillipkruger.membership.service.MembershipService;
 import io.leangen.graphql.annotations.GraphQLArgument;
+import io.leangen.graphql.annotations.GraphQLContext;
 import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import java.util.List;
@@ -47,9 +49,19 @@ public class MembershipGraphQLApi {
         return membershipService.getAllMemberships(filter, skip, first);   
     }
     
+    @GraphQLQuery(name = "people")
+    public List<Person> getAllPeople(){
+        return membershipService.getAllPeople();   
+    }
+    
     @GraphQLQuery(name = "membership")
     public Membership getMembership(@GraphQLArgument(name = "membershipId") int id) {
         return membershipService.getMembership(id);
+    }
+    
+    @GraphQLQuery(name = "person")
+    public Person getPerson(@GraphQLArgument(name = "personId") int id){
+        return membershipService.getPerson(id);   
     }
     
     @GraphQLMutation(name = "createMembership")

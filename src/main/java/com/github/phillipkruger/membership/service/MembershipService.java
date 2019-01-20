@@ -2,6 +2,7 @@ package com.github.phillipkruger.membership.service;
 
 import com.github.phillipkruger.membership.MembershipFilter;
 import com.github.phillipkruger.membership.Membership;
+import com.github.phillipkruger.membership.Person;
 import com.github.phillipkruger.membership.Type;
 import java.io.StringWriter;
 import java.util.LinkedHashMap;
@@ -52,8 +53,16 @@ public class MembershipService {
         }
     }
     
+    public List<Person> getAllPeople(){
+        return em.createNamedQuery(Person.QUERY_FIND_ALL, Person.class).getResultList();
+    }
+    
     public Membership getMembership(int id) {
         return em.find(Membership.class,id);
+    }
+    
+    public Person getPerson(int id){
+        return em.find(Person.class,id);
     }
     
     private List<Membership> allMemberships(Optional<Integer> skip,Optional<Integer> first){

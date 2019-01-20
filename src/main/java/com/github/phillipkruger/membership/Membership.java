@@ -37,6 +37,7 @@ public class Membership implements Serializable {
     public static final String QUERY_FIND_ALL = "Membership.findAll";
     public static final String QUERY_FIND_ALL_TYPE = "Membership.findAllType";
     
+    @GraphQLQuery
     @Id @GraphQLId @Schema(required = true, example = "1", description = "Unique identifier")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int membershipId;

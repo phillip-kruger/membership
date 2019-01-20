@@ -12,6 +12,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -26,9 +28,15 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 @Entity
 @XmlRootElement @XmlAccessorType(XmlAccessType.FIELD)
 @Schema(name="Person", description="POJO that represents a person.")
+@NamedQueries({
+    @NamedQuery(name = Person.QUERY_FIND_ALL, query = "SELECT n FROM Person n")
+})
+
 public class Person implements Serializable {
     private static final long serialVersionUID = -8531040143398373846L;
-
+    public static final String QUERY_FIND_ALL = "Person.findAll";
+    
+    @GraphQLQuery
     @Id @GraphQLId @Schema(required = true, example = "1", description = "Unique identifier")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

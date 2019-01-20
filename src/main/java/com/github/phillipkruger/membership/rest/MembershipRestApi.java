@@ -1,8 +1,12 @@
 package com.github.phillipkruger.membership.rest;
 
 import com.github.phillipkruger.membership.Membership;
+import com.github.phillipkruger.membership.Person;
 import com.github.phillipkruger.membership.service.MembershipService;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
@@ -36,10 +40,22 @@ public class MembershipRestApi {
         return membershipService.getAllMemberships();
     }
     
+    @GET @Path("/surname/{id}")
+    @Operation(description = "Get all surnames")
+    public String getMemberSurname(@NotNull @PathParam(value = "id") int id){
+        return membershipService.getMembership(id).getOwner().getSurname();
+    }
+    
     @GET @Path("{id}")
     @Operation(description = "Get a certain membership")
     public Membership getMembership(@NotNull @PathParam(value = "id") int id){
         return membershipService.getMembership(id);
+    }
+    
+    @GET @Path("/person/{id}")
+    @Operation(description = "Get a person")
+    public Person getPerson(@NotNull @PathParam(value = "id") int id){
+        return membershipService.getPerson(id);
     }
     
     @POST
