@@ -16,9 +16,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,12 +23,10 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 @Data @AllArgsConstructor @NoArgsConstructor
 @Entity
-@XmlRootElement @XmlAccessorType(XmlAccessType.FIELD)
 @Schema(name="Person", description="POJO that represents a person.")
 @NamedQueries({
     @NamedQuery(name = Person.QUERY_FIND_ALL, query = "SELECT n FROM Person n")
 })
-
 public class Person implements Serializable {
     private static final long serialVersionUID = -8531040143398373846L;
     public static final String QUERY_FIND_ALL = "Person.findAll";

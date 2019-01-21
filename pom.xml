@@ -59,8 +59,8 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         
         <!-- JEE Platform -->        
-        <javaee.version>7.0</javaee.version>
-        <microProfile.version>1.3</microProfile.version>
+        <javaee.version>8.0</javaee.version>
+        <microProfile.version>2.1</microProfile.version>
             
         <lombok.version>1.18.4</lombok.version>
         
@@ -77,7 +77,7 @@
         <log.level>FINEST</log.level>
         
         
-        <thorntail.version>2.2.1.Final</thorntail.version>
+        <thorntail.version>2.3.0.Final</thorntail.version>
         <thorntail.configDir>${basedir}${file.separator}src${file.separator}main${file.separator}resources</thorntail.configDir>
             
     </properties>

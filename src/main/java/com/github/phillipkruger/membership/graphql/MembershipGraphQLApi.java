@@ -5,7 +5,6 @@ import com.github.phillipkruger.membership.MembershipFilter;
 import com.github.phillipkruger.membership.Person;
 import com.github.phillipkruger.membership.service.MembershipService;
 import io.leangen.graphql.annotations.GraphQLArgument;
-import io.leangen.graphql.annotations.GraphQLContext;
 import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import java.util.List;
