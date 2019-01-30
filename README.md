@@ -3,7 +3,7 @@
 This is an example application that demonstrate how to add [GraphQL](http://facebook.github.io/graphql) to your existing JAX-RS Application.
 
 ***
-## Watch a short [screencast here](https://www.youtube.com/watch?v=TEF4qQzCXKI)
+## Watch a short [screencast here](http://bit.ly/gql-screencast)
 ## You can play around with an [online demo here](http://bit.ly/gql-demonstration)
 ***
 
