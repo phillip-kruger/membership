@@ -368,9 +368,40 @@
         
         <profile>
             <id>openshift</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
+            <properties>
+                <fabric8-maven-plugin.version>3.5.40</fabric8-maven-plugin.version>
+                <fabric8.generator.from>registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift</fabric8.generator.from>
+                <fabric8.openshift.trimImageInContainerSpec>true</fabric8.openshift.trimImageInContainerSpec>
+                <fabric8.skip.build.pom>true</fabric8.skip.build.pom>
+            </properties>
+            
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>io.fabric8</groupId>
+                        <artifactId>fabric8-maven-plugin</artifactId>
+                        <version>${fabric8-maven-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>resource</goal>
+                                    <goal>build</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <generator>
+                                <includes>
+                                    <include>thorntail-v2</include>
+                                </includes>
+                                <excludes>
+                                    <exclude>webapp</exclude>
+                                </excludes>
+                            </generator>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
     

@@ -47,3 +47,17 @@ The server is now up and running with some test data populated (see resources/ME
 ### Run some examples:
 
 In the [GraphiQL](http://localhost:8080/membership/graph/graphiql/) GUI try out some of the [examples](EXAMPLE.md)
+
+## Openshift
+
+You can also deploy and run this in OpenShift.
+First log into the OpenShift enviroment:
+
+    oc login
+
+Then run 
+
+    mvn clean fabric8:deploy -Popenshift
+
+
+

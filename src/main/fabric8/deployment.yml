@@ -1,0 +1,9 @@
+spec:
+  template:
+    spec:
+      containers:
+        - env:
+           - name: JAVA_OPTIONS
+             value: "-Djava.net.preferIPv4Stack=true"
+           - name: GC_MAX_METASPACE_SIZE
+             value: "500"
