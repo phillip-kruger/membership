@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 import lombok.extern.java.Log;
 
 /**
- * REST Api for Membership service
+ * GraphQL Api for Membership service
  * @author Phillip Kruger (phillip.kruger@phillip-kruger.com)
  */
 @Log

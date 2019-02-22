@@ -7,3 +7,10 @@ spec:
              value: "-Djava.net.preferIPv4Stack=true"
            - name: GC_MAX_METASPACE_SIZE
              value: "500"
+             
+      readinessProbe:
+        httpGet:
+          path: /health
+          port: 8080
+        initialDelaySeconds: 15
+        timeoutSeconds: 1

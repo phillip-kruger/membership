@@ -11,4 +11,15 @@
                 <skipTests>true</skipTests>
             </properties>
         </action>
+        <action>
+            <actionName>CUSTOM-Openshift</actionName>
+            <displayName>Openshift</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>fabric8:deploy</goal>
+            </goals>
+            <activatedProfiles>
+                <activatedProfile>openshift</activatedProfile>
+            </activatedProfiles>
+        </action>
     </actions>

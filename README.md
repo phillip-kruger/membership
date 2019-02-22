@@ -45,6 +45,10 @@ The server is now up and running with some test data populated (see resources/ME
 * Swagger UI : http://localhost:8080/membership/rest/openapi-ui/
 * GraphiQL   : http://localhost:8080/membership/graph/graphiql/
 
+Also:
+
+* MicroProfile Health: http://localhost:8080/health/
+
 ### Run some examples:
 
 In the [GraphiQL](http://localhost:8080/membership/graph/graphiql/) GUI try out some of the [examples](EXAMPLE.md)
@@ -55,6 +59,10 @@ You can also deploy and run this in OpenShift.
 First log into the OpenShift enviroment:
 
     oc login
+    
+If you do not already have a project, create one:
+
+    oc new-project demo --description="Some demo applications" --display-name="Demo"
 
 Then run 
 
