@@ -69,4 +69,40 @@ Then run
     mvn clean fabric8:deploy -Popenshift
 
 
+## MicroProfile GraphQL Proposal.
 
+To get this example running using the MicroProfile GraphQL Proposed API:
+
+1. Get the MicroProfile GraphQL Api from the sandbox and build it locally:
+
+    ```bash
+    git clone https://github.com/eclipse/microprofile-sandbox.git
+    cd microprofile-sandbox
+    mvn clean install
+    ```
+    This will add ```io.microprofile.sandbox | microprofile-graphql-api``` to your local maven repo.
+
+1. Get the [graphql-spqr (microprofile-proto branch)](https://github.com/leangen/graphql-spqr/tree/microprofile-proto) and build it locally:
+
+    ```bash
+    git clone https://github.com/leangen/graphql-spqr.git
+    cd graphql-spqr
+    git checkout microprofile-proto
+    mvn clean install
+    ```
+    This will add ```io.leangen.graphql | spqr``` (microprofile-proto branch) to your local maven repo.
+
+1. Get this example and switch to the microprofile branch:
+
+    ```bash
+    git clone https://github.com/phillip-kruger/membership.git
+    cd membership
+    git checkout microprofile
+    mvn -Pthorntail clean install
+    ```
+
+This will start the example as describe above, but this time using the MicroProfile API
+
+### TODO
+
+Move all to a thorntail fraction, and not as part of the war.
