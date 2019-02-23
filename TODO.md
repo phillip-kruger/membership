@@ -4,6 +4,7 @@
 
 * @GraphQLId
 * ExceptionHandling
+* Dont use singleton, but use beans in spqr
 
 
 ## To be added to the example

@@ -1,4 +1,4 @@
-package com.github.phillipkruger.membership.graphql;
+package com.github.phillipkruger.membership.graphql.impl;
 
 import graphql.schema.GraphQLSchema;
 import io.leangen.graphql.GraphQLSchemaGenerator;
@@ -7,6 +7,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AfterDeploymentValidation;
 import javax.enterprise.inject.spi.Bean;
@@ -43,13 +44,14 @@ public class GraphQLExtension implements Extension {
             schemaGen.withOperationsFromSingleton(
                     beanManager.getReference(component, beanClass, creationalContext), 
                     component.getBeanClass());
+            log.log(Level.INFO, "GraphQL Component [{0}] registered", component.getBeanClass());
         }
         schema = schemaGen.generate();
         
         SchemaProducer schemaProducer = CDI.current().select(SchemaProducer.class).get();
         schemaProducer.setGraphQLSchema(schema);
         
-        log.severe("GraphQL Components registered.");
+        log.info("All GraphQL Components loaded.");
         
     }
     

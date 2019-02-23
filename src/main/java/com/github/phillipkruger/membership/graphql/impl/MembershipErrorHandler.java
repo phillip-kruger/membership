@@ -1,4 +1,4 @@
-package com.github.phillipkruger.membership.graphql;
+package com.github.phillipkruger.membership.graphql.impl;
 
 import graphql.ExceptionWhileDataFetching;
 import graphql.GraphQLError;
@@ -11,6 +11,7 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
+//TODO: Get this working
 public class MembershipErrorHandler implements GraphQLErrorHandler {
 
     @Override

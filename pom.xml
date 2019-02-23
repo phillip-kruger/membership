@@ -70,7 +70,7 @@
         <!-- GraphQL libs -->
         <graphql-java.version>11.0</graphql-java.version>
         <graphql-java-servlet.version>7.0.0</graphql-java-servlet.version>
-        <spqr.version>1.0.0-PK-SNAPSHOT</spqr.version>
+        <spqr.version>1.0.0-SNAPSHOT</spqr.version>
         
         <graphiql.version>0.11.5</graphiql.version>
         
