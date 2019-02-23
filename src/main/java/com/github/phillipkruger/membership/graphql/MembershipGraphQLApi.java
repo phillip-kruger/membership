@@ -4,15 +4,16 @@ import com.github.phillipkruger.membership.Membership;
 import com.github.phillipkruger.membership.MembershipFilter;
 import com.github.phillipkruger.membership.Person;
 import com.github.phillipkruger.membership.service.MembershipService;
-import io.leangen.graphql.annotations.GraphQLArgument;
-import io.leangen.graphql.annotations.GraphQLMutation;
-import io.leangen.graphql.annotations.GraphQLQuery;
+
 import java.util.List;
 import java.util.Optional;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import lombok.extern.java.Log;
+import org.eclipse.microprofile.graphql.Argument;
+import org.eclipse.microprofile.graphql.Mutation;
+import org.eclipse.microprofile.graphql.Query;
 
 /**
  * GraphQL Api for Membership service
@@ -25,51 +26,51 @@ public class MembershipGraphQLApi {
     @Inject
     private MembershipService membershipService;
     
-    @GraphQLQuery(name = "memberships") 
+    @Query("memberships") 
     public List<Membership> getAllMemberships() {
         return getAllMemberships(Optional.empty());
     }
     
-    @GraphQLQuery(name = "memberships")
+    @Query("memberships")
     public List<Membership> getAllMemberships(Optional<MembershipFilter> filter){
         return getAllMemberships(filter,Optional.empty(),Optional.empty());
     }
     
-    @GraphQLQuery(name = "memberships")
-    public List<Membership> getAllMemberships(@GraphQLArgument(name = "skip") Optional<Integer> skip,
-                                            @GraphQLArgument(name = "first") Optional<Integer> first){
+    @Query("memberships")
+    public List<Membership> getAllMemberships(@Argument("skip") Optional<Integer> skip,
+                                            @Argument("first") Optional<Integer> first){
         return getAllMemberships(Optional.empty(),skip,first);
     }
     
-    @GraphQLQuery(name = "memberships")
+    @Query("memberships")
     public List<Membership> getAllMemberships(Optional<MembershipFilter> filter,
-                                @GraphQLArgument(name = "skip") Optional<Integer> skip,
-                                @GraphQLArgument(name = "first") Optional<Integer> first) {
+                                @Argument("skip") Optional<Integer> skip,
+                                @Argument("first") Optional<Integer> first) {
         return membershipService.getAllMemberships(filter, skip, first);   
     }
     
-    @GraphQLQuery(name = "people")
+    @Query("people")
     public List<Person> getAllPeople(){
         return membershipService.getAllPeople();   
     }
     
-    @GraphQLQuery(name = "membership")
-    public Membership getMembership(@GraphQLArgument(name = "membershipId") int id) {
+    @Query("membership")
+    public Membership getMembership(@Argument("membershipId") int id) {
         return membershipService.getMembership(id);
     }
     
-    @GraphQLQuery(name = "person")
-    public Person getPerson(@GraphQLArgument(name = "personId") int id){
+    @Query("person")
+    public Person getPerson(@Argument("personId") int id){
         return membershipService.getPerson(id);   
     }
     
-    @GraphQLMutation(name = "createMembership")
-    public Membership createMembership(@GraphQLArgument(name = "membership") @NotNull Membership membership){
+    @Mutation("createMembership")
+    public Membership createMembership(@Argument("membership") @NotNull Membership membership){
         return membershipService.createMembership(membership);    
     }
     
-    @GraphQLMutation(name = "deleteMembership")
-    public Membership deleteMembership(@GraphQLArgument(name = "membershipId") int id){
+    @Mutation("deleteMembership")
+    public Membership deleteMembership(@Argument("membershipId") int id){
         return membershipService.deleteMembership(id);    
     }
     

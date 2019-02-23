@@ -68,14 +68,14 @@
         <h2.version>1.4.197</h2.version>
         
         <!-- GraphQL libs -->
+        <graphql-java.version>11.0</graphql-java.version>
+        <graphql-java-servlet.version>7.0.0</graphql-java-servlet.version>
+        <spqr.version>1.0.0-PK-SNAPSHOT</spqr.version>
+        
         <graphiql.version>0.11.5</graphiql.version>
-        <spqr.version>0.9.7</spqr.version>
-        <graphql-java.version>8.0</graphql-java.version>
-        <graphql-java-servlet.version>5.0.0</graphql-java-servlet.version>
         
         <log.name>com.github.phillipkruger</log.name>
         <log.level>FINEST</log.level>
-        
         
         <thorntail.version>2.3.0.Final</thorntail.version>
         <thorntail.configDir>${basedir}${file.separator}src${file.separator}main${file.separator}resources</thorntail.configDir>
@@ -94,11 +94,12 @@
                 <artifactId>graphql-java</artifactId>
                 <version>${graphql-java.version}</version>
             </dependency>
+            
             <dependency>
-                <groupId>com.graphql-java</groupId>
+                <groupId>com.graphql-java-kickstart</groupId>
                 <artifactId>graphql-java-servlet</artifactId>
                 <version>${graphql-java-servlet.version}</version>
-            </dependency>
+              </dependency>
             <dependency>
                 <groupId>org.webjars.bower</groupId>
                 <artifactId>graphiql</artifactId>
@@ -193,14 +194,12 @@
                     <groupId>org.ow2.asm</groupId>
                     <artifactId>asm-commons</artifactId>
                 </exclusion>
-                <exclusion>
-                    <groupId>com.graphql-java</groupId>
-                    <artifactId>java-dataloader</artifactId>
-                </exclusion>
+
             </exclusions>
         </dependency>
         <!-- GraphQL java -->
         <dependency>
+            
             <groupId>com.graphql-java</groupId>
             <artifactId>graphql-java</artifactId>
             <exclusions>
@@ -208,17 +207,17 @@
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-api</artifactId>
                 </exclusion>
-                <exclusion>
-                    <groupId>com.graphql-java</groupId>
-                    <artifactId>java-dataloader</artifactId>
-                </exclusion>
             </exclusions>
         </dependency>
         <!-- GraphQL servlet -->
         <dependency>
-            <groupId>com.graphql-java</groupId>
+            <groupId>com.graphql-java-kickstart</groupId>
             <artifactId>graphql-java-servlet</artifactId>
             <exclusions>
+                <exclusion>
+                    <groupId>javax.websocket</groupId>
+                    <artifactId>javax.websocket-api</artifactId>
+                </exclusion>
                 <exclusion>
                     <groupId>com.graphql-java</groupId>
                     <artifactId>graphql-java</artifactId>
