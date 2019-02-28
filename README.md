@@ -31,7 +31,6 @@ Get the source:
     git clone https://github.com/phillip-kruger/membership.git
     cd membership
 
-
 This demo runs on Thorntail
 Build and start:
 
@@ -73,6 +72,8 @@ Then run
 
 To get this example running using the MicroProfile GraphQL Proposed API:
 
+### Basic setup
+
 1. Get the MicroProfile GraphQL Api from the sandbox and build it locally:
 
     ```bash
@@ -102,6 +103,8 @@ To get this example running using the MicroProfile GraphQL Proposed API:
     
     This will add the Thorntail Fraction in your local maven repo.
 
+### Running the Fat jar
+
 1. Get this example and switch to the microprofile branch:
 
     ```bash
@@ -113,7 +116,7 @@ To get this example running using the MicroProfile GraphQL Proposed API:
 
 This will start the example as describe above, but this time using the MicroProfile API. This starts the example in a "fatjar" option.
 
-1.1 Hollow jar / Thin war option.
+### Running the Hollow jar / Thin war.
 
 To test this as a thin war:
 
