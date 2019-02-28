@@ -92,6 +92,16 @@ To get this example running using the MicroProfile GraphQL Proposed API:
     ```
     This will add ```io.leangen.graphql | spqr``` (microprofile-proto branch) to your local maven repo.
 
+1. Get the Thorntail Fraction and build this locally:
+
+    ```bash
+    git clone https://github.com/phillip-kruger/graphql.git
+    cd graphql
+    mvn clean install
+    ```
+    
+    This will add the Thorntail Fraction in your local maven repo.
+
 1. Get this example and switch to the microprofile branch:
 
     ```bash
@@ -101,8 +111,24 @@ To get this example running using the MicroProfile GraphQL Proposed API:
     mvn -Pthorntail clean install
     ```
 
-This will start the example as describe above, but this time using the MicroProfile API
+This will start the example as describe above, but this time using the MicroProfile API. This starts the example in a "fatjar" option.
+
+1.1 Hollow jar / Thin war option.
+
+To test this as a thin war:
+
+    ```bash
+    mvn -Phollow clean install
+    ```
+
+You can then run the following:
+
+    ```bash
+    java -jar target/membership-hollow-thorntail.jar target/membership.war
+    ```
+
+The membership.war is thin.
 
 ### TODO
 
-Move all to a thorntail fraction, and not as part of the war.
+Get a better way to dataload with CDI. This is somewhere in spqr or graphql-java

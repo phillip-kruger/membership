@@ -1,6 +1,6 @@
 package com.github.phillipkruger.membership;
 
-import io.leangen.graphql.annotations.GraphQLId;
+//import io.leangen.graphql.annotations.GraphQLId; //TODO: Should not be here !!
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
@@ -30,7 +30,7 @@ public class Person implements Serializable {
     private static final long serialVersionUID = -8531040143398373846L;
     public static final String QUERY_FIND_ALL = "Person.findAll";
     
-    @Id @GraphQLId @Schema(required = true, example = "1", description = "Unique identifier")
+    @Id /*@GraphQLId*/ @Schema(required = true, example = "1", description = "Unique identifier")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     

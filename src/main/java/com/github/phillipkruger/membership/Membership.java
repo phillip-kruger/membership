@@ -1,6 +1,6 @@
 package com.github.phillipkruger.membership;
 
-import io.leangen.graphql.annotations.GraphQLId;
+//import io.leangen.graphql.annotations.GraphQLId; // TODO: Chould not be here ...
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -32,7 +32,7 @@ public class Membership implements Serializable {
     public static final String QUERY_FIND_ALL = "Membership.findAll";
     public static final String QUERY_FIND_ALL_TYPE = "Membership.findAllType";
     
-    @Id @GraphQLId @Schema(required = true, example = "1", description = "Unique identifier")
+    @Id /*@GraphQLId*/ @Schema(required = true, example = "1", description = "Unique identifier")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int membershipId;
     
