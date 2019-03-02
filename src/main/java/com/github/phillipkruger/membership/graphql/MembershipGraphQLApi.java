@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import lombok.extern.java.Log;
 import org.eclipse.microprofile.graphql.Argument;
+import org.eclipse.microprofile.graphql.GraphQLApi;
 import org.eclipse.microprofile.graphql.Mutation;
 import org.eclipse.microprofile.graphql.Query;
 
@@ -20,6 +21,7 @@ import org.eclipse.microprofile.graphql.Query;
  * @author Phillip Kruger (phillip.kruger@phillip-kruger.com)
  */
 @Log
+@GraphQLApi
 @RequestScoped
 public class MembershipGraphQLApi {
     

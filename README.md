@@ -130,7 +130,7 @@ You can then run the following:
     java -jar target/membership-hollow-thorntail.jar target/membership.war
     ```
 
-The membership.war is thin.
+If you look in the membership.war lib folder, you will see it's thin.
 
 ### TODO
 
