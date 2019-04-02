@@ -72,7 +72,7 @@
         <log.name>com.github.phillipkruger</log.name>
         <log.level>FINEST</log.level>
         
-        <thorntail.version>2.3.0.Final</thorntail.version>
+        <thorntail.version>2.4.0.Final</thorntail.version>
         <thorntail.configDir>${basedir}${file.separator}src${file.separator}main${file.separator}resources</thorntail.configDir>
             
     </properties>
