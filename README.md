@@ -77,16 +77,16 @@ To get this example running using the MicroProfile GraphQL Proposed API:
 1. Get the MicroProfile GraphQL Api from the sandbox and build it locally:
 
     ```bash
-    git clone https://github.com/eclipse/microprofile-sandbox.git
-    cd microprofile-sandbox
+    git clone https://github.com/phillip-kruger/microprofile-graphql.git
+    cd microprofile-graphql
     mvn clean install
     ```
     This will add ```io.microprofile.sandbox | microprofile-graphql-api``` to your local maven repo.
 
-1. Get the [graphql-spqr (microprofile-proto branch)](https://github.com/leangen/graphql-spqr/tree/microprofile-proto) and build it locally:
+1. Get the [graphql-spqr (microprofile-proto branch)](https://github.com/phillip-kruger/graphql-spqr/tree/microprofile-proto) and build it locally:
 
     ```bash
-    git clone https://github.com/leangen/graphql-spqr.git
+    git clone https://github.com/phillip-kruger/graphql-spqr.git
     cd graphql-spqr
     git checkout microprofile-proto
     mvn clean install
