@@ -6,7 +6,6 @@ This is an example application that demonstrate how to add [GraphQL](http://face
 
 ***
 ## Watch a short [screencast here](http://bit.ly/gql-screencast)
-## You can play around with an [online demo here](http://bit.ly/gql-online-demo)
 ***
 
 This application use these libraries:
