@@ -1,12 +1,10 @@
+# **ALSO SEE:** https://github.com/phillip-kruger/graphql-example for a more up to date example
+
 # Membership service
 
 This is an example application that demonstrate how to add [GraphQL](http://facebook.github.io/graphql) to your existing JAX-RS Application.
 
-**ALSO SEE:** https://github.com/phillip-kruger/graphql-example
-
-***
 ## Watch a short [screencast here](http://bit.ly/gql-screencast)
-***
 
 This application use these libraries:
 
